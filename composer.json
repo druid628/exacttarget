@@ -1,12 +1,15 @@
 {
     "name": "druid628/exacttarget",
     "type": "library",
+    "keywords" : ["exact target", "exacttarget", "email", "api" ],
     "description": "Component library for ExactTarget API",
     "license": "MIT",
+    "homepage": "https://github.com/druid628/exacttarget",
     "authors": [
         {
             "name": "Micah Breedlove",
-            "email": "druid628@gmail.com"
+            "email": "druid628@gmail.com",
+            "homepage": "http://micah.breedlove.in/"
         }
     ],
     "require": {
