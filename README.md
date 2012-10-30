@@ -1,12 +1,9 @@
 ExactTargetComponent  
 ========
 
-NOTICE
-----------
-
 **Package:** druid628\exactTarget  
 **Uses:** EtBaseClass.php  
-**Version:** DEV-1.0
+**Version:** 1.0
 
 General  
 ----------
@@ -145,13 +142,14 @@ example of their useage see the Usage heading below).
 
 CHANGELOG  
 ----------
-###Client Access
+###1.0  
+####Client Access
 EtEmail, EtList, EtSubscriber, and EtTriggeredSend all now can be 
 passed the EtClient allowing for save and send functions (see below).
-###Save Methods
+####Save Methods
 EtEmail, EtList and EtSubscriber objects now have a save() method which 
 eliminates the need for calling the client update yourself.
-###Send Methods
+####Send Methods
 EtEmail and EtTriggeredSend objects now have a send() method which 
 eliminates the need for calling the client sendEmail yourself.
 
