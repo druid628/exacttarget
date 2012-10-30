@@ -1,0 +1,26 @@
+{
+    "name": "druid628/exacttarget",
+    "type": "library",
+    "description": "Component library for ExactTarget API",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Micah Breedlove",
+            "email": "druid628@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.5",
+        "ext-soap": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "autoload": {
+        "psr-0": { 
+            "druid628": "src/" 
+        }
+    }
+}
