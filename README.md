@@ -26,7 +26,7 @@ should go through it.  Other classes can be used outside the context of the
 EtClient file.
 
 Each *magic* function works as Symfony-like *magic* getters and setters.  The 
-create, recall, and update each execute SOAP calls to preform their intended 
+create, recall, update, and bundle each execute SOAP calls to preform their intended 
 action.  
   
 **Example (subscriber)**:  
@@ -129,7 +129,7 @@ record (think of mysql> DESC <table>;) and returning the properties that are
 `$EtClient->getDefinitionOfObject($EtClass);`  
 
  * #### Magic
-There are three (3) *magic* function calls built into this client (for an 
+There are four (4) *magic* function calls built into this client (for an 
 example of their useage see the Usage heading below).    
 
   *  create - creates and returns a specified Et object
