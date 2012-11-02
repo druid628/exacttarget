@@ -137,6 +137,8 @@ example of their useage see the Usage heading below).
   on filter parameters provided (returns false if none exists)
   *  update - updates an existing Exact Target record based on the Et object 
   given
+  *  bundle - Batch update method which will call an Update request used to add 
+  many subscribers, etc.
 
 * * *
 
