@@ -158,5 +158,5 @@ eliminates the need for calling the client sendEmail yourself.
 Contributors
 ----------
  * Micah Breedlove - <https://github.com/druid628> - [@druid628](http://twitter.com/druid628)
- * Matt Rathbun - [matt.rathbun@iostudio.com](mailto:matt.rathbun@iostudio.com)
+ * Matt Rathbun  
 
