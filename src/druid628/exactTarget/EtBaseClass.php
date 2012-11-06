@@ -10,7 +10,7 @@ namespace druid628\exactTarget;
  * 
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com>
- * @version 2.0
+ * @version 1.0
  * 
  */
 abstract class EtBaseClass {

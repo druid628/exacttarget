@@ -27,7 +27,7 @@ use druid628\exactTarget\EtTriggeredSendDefinition;
  * 
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com> <micah.breedlove@blueshamrock.com>
- * @version 2.0
+ * @version 1.0
  */
 class EtClient extends EtBaseClass {
 

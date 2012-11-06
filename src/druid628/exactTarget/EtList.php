@@ -2,7 +2,7 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\ioBaseClass;
+use druid628\exactTarget\EtBaseClass;
 
 /**
  * EtList (Active Class)
@@ -12,7 +12,7 @@ use druid628\exactTarget\ioBaseClass;
  * 
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com>
- * @version 2.0
+ * @version 1.0
  */
 class EtList extends EtBaseClass {
 

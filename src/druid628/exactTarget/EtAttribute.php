@@ -10,7 +10,7 @@ use druid628\exactTarget\EtBaseClass;
  * 
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com>
- * @version 2.0
+ * @version 1.0
  */
 
 class EtAttribute extends EtBaseClass
