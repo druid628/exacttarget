@@ -3,7 +3,8 @@ ExactTargetComponent
 
 **Package:** druid628\exactTarget  
 **Uses:** EtBaseClass.php  
-**Version:** 1.0
+**Version:** 1.0  
+![Project status](http://stillmaintained.com/druid628/exacttarget.png)  
 
 General  
 ----------
