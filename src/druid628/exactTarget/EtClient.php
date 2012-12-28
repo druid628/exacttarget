@@ -60,7 +60,12 @@ class EtClient extends EtBaseClass {
 
         public function __construct($username, $password, $serverinstance = 's4') {
                   
-                $this->wsdl = "https://webservice." . $serverinstance. ".exacttarget.com/etframework.wsdl"; 
+                 if($serverinstance != '')
+                 {
+                    $serverinstance .= ".";
+                 }
+
+                $this->wsdl = "https://webservice." . $serverinstance. "exacttarget.com/etframework.wsdl"; 
                 
                 $this->client = new EtSoapClient($this->wsdl, array('trace' => 1));
                 $this->client->username = $username;
