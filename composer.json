@@ -13,8 +13,10 @@
         }
     ],
     "require": {
-        "php": ">=5.3.5",
-        "ext-soap": "*"
+        "php"         : ">=5.3.5",
+        "ext-soap"    : "*",
+        "ext-openssl" : "*",
+        "ext-mcrypt"  : "*"
     },
     "extra": {
         "branch-alias": {
