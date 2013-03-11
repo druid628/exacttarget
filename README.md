@@ -155,6 +155,10 @@ eliminates the need for calling the client update yourself.
 ####Send Methods
 EtEmail and EtTriggeredSend objects now have a send() method which 
 eliminates the need for calling the client sendEmail yourself.
+###1.0.2
+####composer
+Added lib-openssl and ext-mcrypt to composer.json file
+
 
 * * *
 

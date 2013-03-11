@@ -15,7 +15,7 @@
     "require": {
         "php"         : ">=5.3.5",
         "ext-soap"    : "*",
-        "ext-openssl" : "*",
+        "lib-openssl" : "*",
         "ext-mcrypt"  : "*"
     },
     "extra": {
