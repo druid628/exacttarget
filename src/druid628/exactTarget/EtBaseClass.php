@@ -3,27 +3,27 @@
 namespace druid628\exactTarget;
 
 /**
- * EtBaseClass 
+ * EtBaseClass
  *
- * Basic class with generic getters and setters with capability for 
+ * Basic class with generic getters and setters with capability for
  * further expansion. Includes lcfirst().
- * 
+ *
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com>
  * @version 1.0
- * 
+ *
  */
-abstract class EtBaseClass {
-
+abstract class EtBaseClass
+{
         /**
          * magic getter
-         * 
+         *
          * @param String $fieldName
          * @return mixed
-         * @throws \Exception 
+         * @throws \Exception
          */
-        public function get($fieldName) {
-
+        public function get($fieldName)
+        {
             if (!property_exists($this, $fieldName)) {
                     throw new \Exception("Variable  ($fieldName) Not Found on " . get_class($this) . " object. ");
             }
@@ -37,28 +37,29 @@ abstract class EtBaseClass {
          * @param String $fieldName
          * @param mixed $value
          * @return boolean
-         * @throws \Exception 
+         * @throws \Exception
          */
-        public function set($fieldName, $value) {
-
+        public function set($fieldName, $value)
+        {
             if (!property_exists($this, $fieldName)) {
                     throw new \Exception("Variable  ($fieldName) Not Found on " . get_class($this) . " object. ");
             }
 
             $this->$fieldName = $value;
+
             return true;
         }
 
         /**
          * Magic
-         * 
+         *
          * @param string $method
          * @param array $arguments
          * @return mixed
-         * @throws \Exception 
+         * @throws \Exception
          */
-        public function __call($method, $arguments) {
-
+        public function __call($method, $arguments)
+        {
             try {
                     $verb = substr($method, 0, 3);
                     if (in_array($verb, array('set', 'get'))) {
@@ -87,13 +88,13 @@ abstract class EtBaseClass {
          *
          * @param stdObj $obj - standard php object
          * @param string $class - Et-class
-         * @param EtClient $client 
+         * @param EtClient $client
          *
          * @return <typeOf $class>
          *
          */
-        public function cast($obj, $class, $client = null) {
-
+        public function cast($obj, $class, $client = null)
+        {
             $reflectionClass = new \ReflectionClass($class);
             if (!$reflectionClass->IsInstantiable()) {
                     throw new \Exception($class . " is not instantiable!");
@@ -136,7 +137,7 @@ abstract class EtBaseClass {
         }
 
         /**
-         * reAssign - Used to reassign existing object's ($this) variables to the ones from 
+         * reAssign - Used to reassign existing object's ($this) variables to the ones from
          * the given to method.
          *
          * @param mixed $newClass - any Et-class
@@ -144,36 +145,32 @@ abstract class EtBaseClass {
          * @see druid628\exactTarget\EtSubscriber
          *
          */
-        protected function reAssign($newClass) {
-
-            if (get_class($newClass) !== get_class($this))
-            {
+        protected function reAssign($newClass)
+        {
+            if (get_class($newClass) !== get_class($this)) {
                 return false;
             }
 
             $vars = get_class_vars(get_class($newClass));
             unset($vars['client']);
-            foreach ($vars as $variable => $value)
-            {
+            foreach ($vars as $variable => $value) {
                 $this->set($variable, $newClass->get($variable));
             }
-            
+
         }
 
         /**
          * PHP has a function ucfirst() but not a lcfirst() now it does
          * Lowers the first character of a string.
-         * 
+         *
          * @param String $string
-         * @return String 
+         * @return String
          */
-        public function lcfirst($string) {
-
+        public function lcfirst($string)
+        {
                 $string{0} = strtolower($string{0});
+
                 return $string;
         }
-
-
-        
 
 }

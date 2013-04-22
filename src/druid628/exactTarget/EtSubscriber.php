@@ -7,16 +7,16 @@ use druid628\exactTarget\EtSubscriberList;
 
 /**
  * EtSubscriber (Active Class)
- * 
+ *
  * Active Classes accept an instance of druid628\exactTarget\EtClient
- * to communicate with the Exact Target server. 
- * 
+ * to communicate with the Exact Target server.
+ *
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com>
  * @version 1.0
  */
-class EtSubscriber extends EtBaseClass {
-
+class EtSubscriber extends EtBaseClass
+{
         const ACTIVE = 'Active';
         const BOUNCED = 'Bounced';
         const HELD = 'Held';
@@ -37,31 +37,34 @@ class EtSubscriber extends EtBaseClass {
         public $SubscriberTypeDefinition;  // EtSubscriberTypeDefinition
 
         /**
-         * allow for passing optional client class to [some] Et-classes 
+         * allow for passing optional client class to [some] Et-classes
          * so they can take advantage of client specific functions.
          * e.g. send() and save()
          *
-         * @param druid628\exactTarget\EtClient $EtClient 
+         * @param druid628\exactTarget\EtClient $EtClient
          */
-        public function __construct($EtClient = null) {
+        public function __construct($EtClient = null)
+        {
                 $this->client = $EtClient;
         }
 
         /**
-         * Used for setting client after class instantiation 
+         * Used for setting client after class instantiation
          *
-         * @param druid628\exactTarget\EtClient $EtClient 
+         * @param druid628\exactTarget\EtClient $EtClient
          */
-        public function setClient($EtClient) {
+        public function setClient($EtClient)
+        {
                 $this->client = $EtClient;
         }
 
         /**
          * Get active client instance.
          *
-         * @return druid628\exactTarget\EtClient 
+         * @return druid628\exactTarget\EtClient
          */
-        public function getClient() {
+        public function getClient()
+        {
                 return $this->client;
         }
 
@@ -69,12 +72,13 @@ class EtSubscriber extends EtBaseClass {
          * save() - uses (EtClient) $this->client  to save/update
          *
          */
-        public function save() {
+        public function save()
+        {
                 $this->client->updateSubscriber($this);
         }
 
         /**
-         * find() - find give find at least a subscriberKey (email addy) and it will 
+         * find() - find give find at least a subscriberKey (email addy) and it will
          * recall a subscriber.
          *
          * @param string $subscriberKey
@@ -86,7 +90,8 @@ class EtSubscriber extends EtBaseClass {
          *             'Value'    => $subscriberKey,
          *         ),
          */
-        public function find($subscriberKey, $emailAddress = null, $options = array()) {
+        public function find($subscriberKey, $emailAddress = null, $options = array())
+        {
                 $subscriberInfo = array(
                      array(
                           'Name' => 'SubscriberKey',
@@ -118,9 +123,10 @@ class EtSubscriber extends EtBaseClass {
          * Used for filling existing object with the data used when locating a subscriber.
          * @see find() $options array
          *
-         * @param array $subscriberInfo 
+         * @param array $subscriberInfo
          */
-        protected function populateNew($subscriberInfo) {
+        protected function populateNew($subscriberInfo)
+        {
                 foreach ($subscriberInfo as $info) {
                         if (strtolower($info['operator']) == "equals") {
                                 $this->set($info['Name'], $info['Value']);
@@ -134,7 +140,8 @@ class EtSubscriber extends EtBaseClass {
          * @param string $attributeName
          *
          */
-        public function getAttribute($attributeName) {
+        public function getAttribute($attributeName)
+        {
                 $attributes = $this->getAttributes();
                 foreach ($attributes as $key => $object) {
                         if (strtolower($object->Name) == strtolower($attributeName)) {
@@ -150,9 +157,10 @@ class EtSubscriber extends EtBaseClass {
          *
          * @param druid628\exactTarget\EtAttribute $EtAttribute
          * @return boolean
-         * @throws \Exception 
+         * @throws \Exception
          */
-        public function updateAttribute($EtAttribute) {
+        public function updateAttribute($EtAttribute)
+        {
                 if (!($EtAttribute instanceof \druid628\exactTarget\EtAttribute)) {
                         throw new \Exception(" updateAttribute expects an instance of \druid628\exactTarget\EtAttribute and was given " . get_class($EtAttribute) . ". ");
                 }
@@ -166,6 +174,7 @@ class EtSubscriber extends EtBaseClass {
                 }
                 $attributes[] = $EtAttribute;
                 $this->Attributes = array_values($attributes);
+
                 return true;
         }
 
@@ -173,7 +182,8 @@ class EtSubscriber extends EtBaseClass {
          *
          * @param int $listId EtList->getID()
          */
-        public function addToList($listId) {
+        public function addToList($listId)
+        {
                 $slist = new EtSubscriberList();
                 $slist->setID($listId);
                 $slist->setAction("create");
@@ -183,19 +193,21 @@ class EtSubscriber extends EtBaseClass {
 
         /**
          * Sets the object into a not new status
-         * 
-         * @return void 
+         *
+         * @return void
          */
-        private function isNotNew() {
+        private function isNotNew()
+        {
                 $this->_new = false;
         }
 
         /**
          * Determines if an object is new or a retrieved record from ExactTarget
-         * 
-         * @return boolean 
+         *
+         * @return boolean
          */
-        public function isNew() {
+        public function isNew()
+        {
                 return $this->_new;
         }
 

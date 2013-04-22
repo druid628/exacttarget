@@ -4,15 +4,13 @@ namespace druid628\exactTarget;
 
 use druid628\exactTarget\EtBaseClass;
 use druid628\exactTarget\EtSoapClient;
-use druid628\exactTarget\EtSubscriber;
 use druid628\exactTarget\EtSimpleOperators;
 use druid628\exactTarget\EtTriggeredSend;
 use druid628\exactTarget\EtTriggeredSendDefinition;
 
-
 /**
  * EtClient - ExactTarget SOAP client
- * 
+ *
  * @property const PRODWSDL
  * @property const SOAPWSDL
  * @property const ADDONLY
@@ -20,17 +18,18 @@ use druid628\exactTarget\EtTriggeredSendDefinition;
  * @property const NOTHING
  * @property const UPDATEADD
  * @property const UPDATEONLY
- * 
+ *
+ * @property EtSoapClient $client
+ * @property string $serverInstance
  * @property string $wsdl
  * @property array $validSendTypes
- * @property EtSoapClient $client
- * 
+ *
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com> <micah.breedlove@blueshamrock.com>
  * @version 1.0
  */
-class EtClient extends EtBaseClass {
-
+class EtClient extends EtBaseClass
+{
         // Exact Target API WSDL
         const SOAPWSDL = "http://exacttarget.com/wsdl/partnerAPI";
         // Save Actions
@@ -41,35 +40,60 @@ class EtClient extends EtBaseClass {
         const UPDATEONLY='UpdateOnly';
 
         private $eventProperties = array(
-                'sent'             => array('ListID',    'SubscriberID',  'EventDate',      'EventType',    'SubscriberKey',  'SendID'), 
-                'open'             => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'), 
-                'click'            => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'), 
-                'unsub'            => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'), 
-                'subscriberstatus' => array('Client.ID', 'SubscriberID',  'SubscriberKey',  'ReasonUnsub',  'CurrentStatus',  'PreviousStatus',  'CreatedDate'), 
-    	);
+                'sent'             => array('ListID',    'SubscriberID',  'EventDate',      'EventType',    'SubscriberKey',  'SendID'),
+                'open'             => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'),
+                'click'            => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'),
+                'unsub'            => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'),
+                'subscriberstatus' => array('Client.ID', 'SubscriberID',  'SubscriberKey',  'ReasonUnsub',  'CurrentStatus',  'PreviousStatus',  'CreatedDate'),
+        );
 
         protected $client;
+        protected $serverInstance;
         protected $wsdl;
         protected $validSendTypes = array(
                 "SMSTriggeredSend",
                 "Send",
                 "TriggeredSend",
         );
-	
 
+        /**
+         * Build An authenticated SoapClient for use with Exact Target
+         *
+         * @param String $username Exact Target username
+         * @param String $password Exact Target password
+         * @param String $serverInstance Exact Target Server/Instance (e.g. ""; "s4"; "s6")
+         *
+         */
+        public function __construct($username, $password, $serverInstance = '')
+        {
 
-        public function __construct($username, $password, $serverinstance = 's4') {
-                  
-                 if($serverinstance != '')
-                 {
-                    $serverinstance .= ".";
-                 }
+                $this->setServer($serverInstance);
 
-                $this->wsdl = "https://webservice." . $serverinstance. "exacttarget.com/etframework.wsdl"; 
-                
                 $this->client = new EtSoapClient($this->wsdl, array('trace' => 1));
                 $this->client->username = $username;
                 $this->client->password = $password;
+        }
+
+        /**
+         * What server am I connected to?
+         *
+         * @return String (e.g. ""; "s4"; "s6")
+         */
+        public function getServer()
+        {
+            return $this->serverInstance;
+        }
+
+        public function setServer($serverInstance = '')
+        {
+            $this->serverInstance = $serverInstance;
+
+            $this->serverInstance = $serverInstance;
+            if ($serverInstance != '') {
+                $serverInstance .= ".";
+            }
+
+            $this->wsdl = "https://webservice." . $serverinstance. "exacttarget.com/etframework.wsdl";
         }
 
         /**
@@ -79,7 +103,8 @@ class EtClient extends EtBaseClass {
          * @param string $method
          * @param array $arguments
          */
-        public function __call($method, $arguments) {
+        public function __call($method, $arguments)
+        {
                 try {
                         $verb = substr($method, 0, 6);
                         if (in_array($verb, array('create', 'recall', 'update', 'bundle'))) {
@@ -107,9 +132,10 @@ class EtClient extends EtBaseClass {
          * Generic Create function to call ET-Create Request
          *
          * @param array $userData
-         * @return mixed | Object if successful boolean false if unsuccessful 
+         * @return mixed | Object if successful boolean false if unsuccessful
          */
-        public function create($class, $userData) {
+        public function create($class, $userData)
+        {
                 if (!is_array($userData)) {
                         return false;
                 }
@@ -142,8 +168,8 @@ class EtClient extends EtBaseClass {
          *
          * @param Et[mixed] $class
          * @param array $properties
-         * @return mixed | Object if successful boolean false if unsuccessful 
-         * 
+         * @return mixed | Object if successful boolean false if unsuccessful
+         *
          * $properties array(
          *              [0] =>
          *                  array(
@@ -153,7 +179,8 @@ class EtClient extends EtBaseClass {
          *                  ), ...
          *     )
          */
-        public function recall($class, $properties) {
+        public function recall($class, $properties)
+        {
                 $className = substr($class, 2);
 
                 $request = new EtRecallRequest();
@@ -174,9 +201,9 @@ class EtClient extends EtBaseClass {
                 $requestMsg->RetrieveRequest = $request;
                 $results = $this->client->Retrieve($requestMsg);
                 $nsClass = __NAMESPACE__ . "\\". $class;
-                if(isset($results->Results))
-                {
+                if (isset($results->Results)) {
                         $recalledClass = $this->cast($results->Results, new $nsClass($this), $this);
+
                         return $recalledClass;
                 }
 
@@ -189,20 +216,19 @@ class EtClient extends EtBaseClass {
          * @param string $class
          * @param <T>object $activeClass
          * @param string $updateType
-         * @return <classOfT> $activeClass 
+         * @return <classOfT> $activeClass
          */
         public function update($class, $activeClass, $updateType = "UPDATEADD")
         {
 
                 $nsClass = __NAMESPACE__ . "\\". $class;
-                if(!($activeClass instanceof $nsClass ))
-                {
+                if (!($activeClass instanceof $nsClass )) {
                         throw new \Exception(" UPDATE Failed! (Error Code: #DR4T) -   Update expect Class $class but was given " . get_class( $activeClass). ".  Update Cannot update given object" );
                 }
                 $className = substr($class, 2);
 
                 $object = new \SoapVar($activeClass, SOAP_ENC_OBJECT, $className, self::SOAPWSDL);
-                
+
                 $request = new EtCreateRequest();
                 $requestOptions = new EtCreateOptions();
                 $saveOption = new EtSaveOption();
@@ -215,18 +241,18 @@ class EtClient extends EtBaseClass {
                 $results = $this->client->Create($request);
 
                 $updatedClass = $this->cast($results->Results->Object, new $nsClass($this), $this );
-                return $updatedClass;
 
+                return $updatedClass;
 
         }
 
         /**
-         * Bundle -  Batch update method which will call ET-Update Request.  
+         * Bundle -  Batch update method which will call ET-Update Request.
          * Used to add many subscribers, etc.
          *
          * @author Matt Rathbun <matt.rathbun@iostudio.com>
          * @param string $class
-         * @param array $activeClasses Array of things to update in ET.  
+         * @param array $activeClasses Array of things to update in ET.
          * @param string $updateType Defaults to upsert style
          * @return boolean|array
          */
@@ -239,11 +265,11 @@ class EtClient extends EtBaseClass {
             $nsClass = __NAMESPACE__ . "\\". $class;
             $className = substr($class, 2);
             $objects = array_map(
-                function($activeClass) use($nsClass, $class, $className) {
-                    if(!($activeClass instanceof $nsClass))
-                    {
+                function($activeClass) use ($nsClass, $class, $className) {
+                    if (!($activeClass instanceof $nsClass)) {
                         throw new \Exception("Bundle Failed! Bundle expects Class $class but was given " . get_class($activeClass) . "." );
                     }
+
                     return new \SoapVar($activeClass,
                                         SOAP_ENC_OBJECT,
                                         $className,
@@ -270,9 +296,9 @@ class EtClient extends EtBaseClass {
                 // a stdClass object if only one object is sent.
                 if (is_array($results->Results)) {
                     $self = $this;
+
                     return array_map(
-                        function($object) use($nsClass, $self)
-                        {
+                        function($object) use ($nsClass, $self) {
                             $newObject = $self->cast($object->Object, new $nsClass());
                             if (isset($object->StatusCode)) {
                                 $newObject->StatusCode = $object->StatusCode;
@@ -283,47 +309,43 @@ class EtClient extends EtBaseClass {
                             if (isset($object->ErrorCode)) {
                                 $newObject->ErrorCode = $object->ErrorCode;
                             }
+
                             return $newObject;
                         },
                         $results->Results
                     );
                 }
-                
+
                 $newObject = $this->cast($results->Results->Object, new $nsClass());
                 $newObject->StatusCode = $results->Results->StatusCode;
                 $newObject->StatusMessage = $results->Results->StatusMessage;
                 $newObject->OrdinalID = $results->Results->OrdinalID;
                 $newObject->NewID = $results->Results->NewID;
-                
+
                 return array($newObject);
             }
 
             return false;
         }
 
-
-
         /**
          *
          * @param string $triggeredSendKey
          * @param array $options
-         * @return EtTriggeredSend 
+         * @return EtTriggeredSend
          */
         public function buildTriggeredSend($triggeredSendKey, $options = array())
         {
                 $tsd = new EtTriggeredSendDefinition();
                 $tsd->setCustomerKey($triggeredSendKey);
-                if(!empty($options))
-                {
-                        foreach($options as $key => $value)
-                        {
+                if (!empty($options)) {
+                        foreach ($options as $key => $value) {
                                 $tsd->set($key, $value);
                         }
                 }
 
                 $ts = new EtTriggeredSend($this);
                 $ts->setTriggeredSendDefinition(new \SoapVar($tsd, SOAP_ENC_OBJECT, "TriggeredSendDefinition", self::SOAPWSDL));
-
 
                 // return the triggeredSend to allow you to add subscribers or whatever you need to do
                 return $ts;
@@ -332,10 +354,11 @@ class EtClient extends EtBaseClass {
         /**
          *
          * @param mixed $email
-         * @param string $sendType - <classOf> $email  Known Valid Send types:  "TriggeredSend","SMSTriggeredSend","Send" 
-         * @return boolean 
+         * @param string $sendType - <classOf> $email  Known Valid Send types:  "TriggeredSend","SMSTriggeredSend","Send"
+         * @return boolean
          */
-        public function sendEmail($email, $sendType) {
+        public function sendEmail($email, $sendType)
+        {
                 $object = new \SoapVar($email, SOAP_ENC_OBJECT, $sendType, self::SOAPWSDL);
 
                 $soapRequest = new EtCreateRequest();
@@ -357,10 +380,10 @@ class EtClient extends EtBaseClass {
         /**
          *
          * @param string $objectType
-         * @return array 
+         * @return array
          */
-        function getDefinitionOfObject($objectType) {
-
+        function getDefinitionOfObject($objectType)
+        {
                 $lstProps = array();
                 try {
                         $request = new EtObjectDefinitionRequest();
@@ -391,18 +414,18 @@ class EtClient extends EtBaseClass {
                 }
         }
 
-
         /**
          * Used for soapCalls outside of EtClient. EtClient methods should be updated to use this function
-         * 
+         *
          * @param Et-(mixed) $object Object to Send
-         * @return \SoapVar 
+         * @return \SoapVar
          */
         public function soapCall($object)
         {
                 // get class of object, remove namespace, and strip off Et  .::.  Wicked voodoo magic
-                $classType = substr(end(explode('\\', get_class($object))), 2); 
+                $classType = substr(end(explode('\\', get_class($object))), 2);
                 $suds = new \SoapVar($object, SOAP_ENC_OBJECT, $classType, self::SOAPWSDL);
+
                 return $suds;
         }
 
@@ -415,12 +438,10 @@ class EtClient extends EtBaseClass {
          */
         public function simpleQuery($eventType, $filter)
         {
-                if(!in_array(strtolower($eventType), array_keys($this->eventProperties)) || !is_array($filter))
-                {
+                if (!in_array(strtolower($eventType), array_keys($this->eventProperties)) || !is_array($filter)) {
                     return false;
                 }
-                if(!isset($filter['operator']))
-                {
+                if (!isset($filter['operator'])) {
                     $filter['operator'] = EtSimpleOperators::EQUALS;
                 }
 
