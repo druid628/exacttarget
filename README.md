@@ -17,7 +17,9 @@ basic level.
 ExactTarget API PHP starter kit (available: 
 <http://docs.code.exacttarget.com/@api/deki/files/199/=PHP_APIstarterKit-V1.zip>
 Source: 
-<http://docs.code.exacttarget.com/020_Web_Service_Guide/API_Starter_Kits>)
+<http://docs.code.exacttarget.com/020_Web_Service_Guide/API_Starter_Kits>)  
+  
+Presentation: <http://prezi.com/p4ckcmlimnyi/exacttarget-component/?kw=view-p4ckcmlimnyi&rc=ref-13751401>
   
 
 Usage  
