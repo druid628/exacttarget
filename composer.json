@@ -1,10 +1,10 @@
 {
-    "name": "druid628/exacttarget",
+    "name": "joesexton00/exacttarget",
     "type": "library",
     "keywords" : ["exact target", "exacttarget", "email", "api" ],
     "description": "Component library for ExactTarget API",
     "license": "MIT",
-    "homepage": "https://github.com/druid628/exacttarget",
+    "homepage": "https://github.com/joesexton00/exacttarget",
     "authors": [
         {
             "name": "Micah Breedlove",
@@ -24,8 +24,8 @@
         }
     },
     "autoload": {
-        "psr-0": { 
-            "druid628": "src/" 
+        "psr-0": {
+            "druid628": "src/"
         }
     }
 }
