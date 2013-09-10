@@ -9,10 +9,12 @@ use druid628\exactTarget\EtSimpleOperators;
 use druid628\exactTarget\EtTriggeredSend;
 use druid628\exactTarget\EtTriggeredSendDefinition;
 
+include "ExactTargetClasses.php";
+
 
 /**
  * EtClient - ExactTarget SOAP client
- * 
+ *
  * @property const PRODWSDL
  * @property const SOAPWSDL
  * @property const ADDONLY
@@ -20,11 +22,11 @@ use druid628\exactTarget\EtTriggeredSendDefinition;
  * @property const NOTHING
  * @property const UPDATEADD
  * @property const UPDATEONLY
- * 
+ *
  * @property string $wsdl
  * @property array $validSendTypes
  * @property EtSoapClient $client
- * 
+ *
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com> <micah.breedlove@blueshamrock.com>
  * @version 1.0
@@ -41,11 +43,11 @@ class EtClient extends EtBaseClass {
         const UPDATEONLY='UpdateOnly';
 
         private $eventProperties = array(
-                'sent'             => array('ListID',    'SubscriberID',  'EventDate',      'EventType',    'SubscriberKey',  'SendID'), 
-                'open'             => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'), 
-                'click'            => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'), 
-                'unsub'            => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'), 
-                'subscriberstatus' => array('Client.ID', 'SubscriberID',  'SubscriberKey',  'ReasonUnsub',  'CurrentStatus',  'PreviousStatus',  'CreatedDate'), 
+                'sent'             => array('ListID',    'SubscriberID',  'EventDate',      'EventType',    'SubscriberKey',  'SendID'),
+                'open'             => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'),
+                'click'            => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'),
+                'unsub'            => array('EventDate', 'EventType',     'SubscriberKey',  'SendID'),
+                'subscriberstatus' => array('Client.ID', 'SubscriberID',  'SubscriberKey',  'ReasonUnsub',  'CurrentStatus',  'PreviousStatus',  'CreatedDate'),
     	);
 
         protected $client;
@@ -55,18 +57,18 @@ class EtClient extends EtBaseClass {
                 "Send",
                 "TriggeredSend",
         );
-	
+
 
 
         public function __construct($username, $password, $serverinstance = 's4') {
-                  
+
                  if($serverinstance != '')
                  {
                     $serverinstance .= ".";
                  }
 
-                $this->wsdl = "https://webservice." . $serverinstance. "exacttarget.com/etframework.wsdl"; 
-                
+                $this->wsdl = "https://webservice." . $serverinstance. "exacttarget.com/etframework.wsdl";
+
                 $this->client = new EtSoapClient($this->wsdl, array('trace' => 1));
                 $this->client->username = $username;
                 $this->client->password = $password;
@@ -107,7 +109,7 @@ class EtClient extends EtBaseClass {
          * Generic Create function to call ET-Create Request
          *
          * @param array $userData
-         * @return mixed | Object if successful boolean false if unsuccessful 
+         * @return mixed | Object if successful boolean false if unsuccessful
          */
         public function create($class, $userData) {
                 if (!is_array($userData)) {
@@ -142,8 +144,8 @@ class EtClient extends EtBaseClass {
          *
          * @param Et[mixed] $class
          * @param array $properties
-         * @return mixed | Object if successful boolean false if unsuccessful 
-         * 
+         * @return mixed | Object if successful boolean false if unsuccessful
+         *
          * $properties array(
          *              [0] =>
          *                  array(
@@ -189,7 +191,7 @@ class EtClient extends EtBaseClass {
          * @param string $class
          * @param <T>object $activeClass
          * @param string $updateType
-         * @return <classOfT> $activeClass 
+         * @return <classOfT> $activeClass
          */
         public function update($class, $activeClass, $updateType = "UPDATEADD")
         {
@@ -202,7 +204,7 @@ class EtClient extends EtBaseClass {
                 $className = substr($class, 2);
 
                 $object = new \SoapVar($activeClass, SOAP_ENC_OBJECT, $className, self::SOAPWSDL);
-                
+
                 $request = new EtCreateRequest();
                 $requestOptions = new EtCreateOptions();
                 $saveOption = new EtSaveOption();
@@ -221,12 +223,12 @@ class EtClient extends EtBaseClass {
         }
 
         /**
-         * Bundle -  Batch update method which will call ET-Update Request.  
+         * Bundle -  Batch update method which will call ET-Update Request.
          * Used to add many subscribers, etc.
          *
          * @author Matt Rathbun <matt.rathbun@iostudio.com>
          * @param string $class
-         * @param array $activeClasses Array of things to update in ET.  
+         * @param array $activeClasses Array of things to update in ET.
          * @param string $updateType Defaults to upsert style
          * @return boolean|array
          */
@@ -288,13 +290,13 @@ class EtClient extends EtBaseClass {
                         $results->Results
                     );
                 }
-                
+
                 $newObject = $this->cast($results->Results->Object, new $nsClass());
                 $newObject->StatusCode = $results->Results->StatusCode;
                 $newObject->StatusMessage = $results->Results->StatusMessage;
                 $newObject->OrdinalID = $results->Results->OrdinalID;
                 $newObject->NewID = $results->Results->NewID;
-                
+
                 return array($newObject);
             }
 
@@ -307,7 +309,7 @@ class EtClient extends EtBaseClass {
          *
          * @param string $triggeredSendKey
          * @param array $options
-         * @return EtTriggeredSend 
+         * @return EtTriggeredSend
          */
         public function buildTriggeredSend($triggeredSendKey, $options = array())
         {
@@ -332,8 +334,8 @@ class EtClient extends EtBaseClass {
         /**
          *
          * @param mixed $email
-         * @param string $sendType - <classOf> $email  Known Valid Send types:  "TriggeredSend","SMSTriggeredSend","Send" 
-         * @return boolean 
+         * @param string $sendType - <classOf> $email  Known Valid Send types:  "TriggeredSend","SMSTriggeredSend","Send"
+         * @return boolean
          */
         public function sendEmail($email, $sendType) {
                 $object = new \SoapVar($email, SOAP_ENC_OBJECT, $sendType, self::SOAPWSDL);
@@ -357,7 +359,7 @@ class EtClient extends EtBaseClass {
         /**
          *
          * @param string $objectType
-         * @return array 
+         * @return array
          */
         function getDefinitionOfObject($objectType) {
 
@@ -394,14 +396,14 @@ class EtClient extends EtBaseClass {
 
         /**
          * Used for soapCalls outside of EtClient. EtClient methods should be updated to use this function
-         * 
+         *
          * @param Et-(mixed) $object Object to Send
-         * @return \SoapVar 
+         * @return \SoapVar
          */
         public function soapCall($object)
         {
                 // get class of object, remove namespace, and strip off Et  .::.  Wicked voodoo magic
-                $classType = substr(end(explode('\\', get_class($object))), 2); 
+                $classType = substr(end(explode('\\', get_class($object))), 2);
                 $suds = new \SoapVar($object, SOAP_ENC_OBJECT, $classType, self::SOAPWSDL);
                 return $suds;
         }
