@@ -3,24 +3,24 @@
 namespace druid628\exactTarget;
 
 /**
- * EtBaseClass 
+ * EtBaseClass
  *
- * Basic class with generic getters and setters with capability for 
+ * Basic class with generic getters and setters with capability for
  * further expansion. Includes lcfirst().
- * 
+ *
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com>
  * @version 1.0
- * 
+ *
  */
 abstract class EtBaseClass {
 
         /**
          * magic getter
-         * 
+         *
          * @param String $fieldName
          * @return mixed
-         * @throws \Exception 
+         * @throws \Exception
          */
         public function get($fieldName) {
 
@@ -37,7 +37,7 @@ abstract class EtBaseClass {
          * @param String $fieldName
          * @param mixed $value
          * @return boolean
-         * @throws \Exception 
+         * @throws \Exception
          */
         public function set($fieldName, $value) {
 
@@ -51,11 +51,11 @@ abstract class EtBaseClass {
 
         /**
          * Magic
-         * 
+         *
          * @param string $method
          * @param array $arguments
          * @return mixed
-         * @throws \Exception 
+         * @throws \Exception
          */
         public function __call($method, $arguments) {
 
@@ -76,9 +76,10 @@ abstract class EtBaseClass {
                     } else {
                             throw new \Exception("Function ($verb) Not Defined");
                     }
+            } catch ( EtErrorException $e ) { // @todo jms-update
+                throw $e;
             } catch (\Exception $e) {
-                    printf("ERROR:\n");
-                    var_dump($e);
+                throw $e;
             }
         }
 
@@ -87,7 +88,7 @@ abstract class EtBaseClass {
          *
          * @param stdObj $obj - standard php object
          * @param string $class - Et-class
-         * @param EtClient $client 
+         * @param EtClient $client
          *
          * @return <typeOf $class>
          *
@@ -136,7 +137,7 @@ abstract class EtBaseClass {
         }
 
         /**
-         * reAssign - Used to reassign existing object's ($this) variables to the ones from 
+         * reAssign - Used to reassign existing object's ($this) variables to the ones from
          * the given to method.
          *
          * @param mixed $newClass - any Et-class
@@ -157,15 +158,15 @@ abstract class EtBaseClass {
             {
                 $this->set($variable, $newClass->get($variable));
             }
-            
+
         }
 
         /**
          * PHP has a function ucfirst() but not a lcfirst() now it does
          * Lowers the first character of a string.
-         * 
+         *
          * @param String $string
-         * @return String 
+         * @return String
          */
         public function lcfirst($string) {
 
@@ -174,6 +175,6 @@ abstract class EtBaseClass {
         }
 
 
-        
+
 
 }
