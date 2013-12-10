@@ -1,13 +1,13 @@
 <?PHP
 
-namespace druid628\exactTarget;
+namespace joesexton00\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
-use druid628\exactTarget\EtSoapClient;
-use druid628\exactTarget\EtSubscriber;
-use druid628\exactTarget\EtSimpleOperators;
-use druid628\exactTarget\EtTriggeredSend;
-use druid628\exactTarget\EtTriggeredSendDefinition;
+use joesexton00\exactTarget\EtBaseClass;
+use joesexton00\exactTarget\EtSoapClient;
+use joesexton00\exactTarget\EtSubscriber;
+use joesexton00\exactTarget\EtSimpleOperators;
+use joesexton00\exactTarget\EtTriggeredSend;
+use joesexton00\exactTarget\EtTriggeredSendDefinition;
 include('ExactTargetClasses.php');
 
 /**
@@ -80,28 +80,21 @@ class EtClient extends EtBaseClass {
 	 * @param array $arguments
 	 */
 	public function __call($method, $arguments) {
-			try {
-					$verb = substr($method, 0, 6);
-					if (in_array($verb, array('create', 'recall', 'update', 'bundle', 'delete'))) {
-							$className = substr($method, 6);
-					} else {
-							parent::__call($method, $arguments);
-					}
+		$verb = substr($method, 0, 6);
+		if (in_array($verb, array('create', 'recall', 'update', 'bundle', 'delete'))) {
+				$className = substr($method, 6);
+		} else {
+				parent::__call($method, $arguments);
+		}
 
-					if (method_exists($this, $verb)) {
-							$className = sprintf("Et%s", $className);
-							if (class_exists(sprintf(__NAMESPACE__ . "\%s", $className))) {
-									return call_user_func_array(array($this, $verb), array_merge(array($className), $arguments));
-							} else {
-									throw new \Exception("Class ($className) Not Found");
-							}
-					}
-			} catch ( EtErrorException $e ) {
-				throw $e;
-			} catch ( \Exception $e ) {
-				throw $e;
-			}
-
+		if (method_exists($this, $verb)) {
+				$className = sprintf("Et%s", $className);
+				if (class_exists(sprintf(__NAMESPACE__ . "\%s", $className))) {
+						return call_user_func_array(array($this, $verb), array_merge(array($className), $arguments));
+				} else {
+						throw new \Exception("Class ($className) Not Found");
+				}
+		}
 	}
 
 	/**
@@ -111,39 +104,49 @@ class EtClient extends EtBaseClass {
 	 * @return mixed | Object if successful boolean false if unsuccessful
 	 */
 	public function create($class, $userData) {
-			if (!is_array($userData)) {
-					return false;
-			}
 
-			$nsClass = __NAMESPACE__ . "\\". $class;
-			$sub = new $nsClass();
-			$propertiesOfClass = array_keys(get_object_vars($sub));
-			foreach ($propertiesOfClass as $prop) {
-					if (array_key_exists($prop, $userData)) {
-							$sub->set($prop, $userData[$prop]);
-					}
-			}
+		if (!is_array($userData)) {
+				return false;
+		}
 
-			$object = new \SoapVar($sub, SOAP_ENC_OBJECT, substr($class, 2), self::SOAPWSDL);
+		$nsClass = __NAMESPACE__ . "\\". $class;
+		$sub = new $nsClass();
+		$propertiesOfClass = array_keys(get_object_vars($sub));
+		foreach ($propertiesOfClass as $prop) {
+				if (array_key_exists($prop, $userData)) {
+						$sub->set($prop, $userData[$prop]);
+				}
+		}
 
-			$request = new EtCreateRequest();
-			$request->Options = NULL;
-			$request->Objects = array($object);
-			$results = $this->client->Create($request);
+		$object = new \SoapVar($sub, SOAP_ENC_OBJECT, substr($class, 2), self::SOAPWSDL);
 
-			if ($results->OverallStatus == "OK") {
-					return $sub;
-			}
+		$request = new EtCreateRequest();
+		$request->Options = NULL;
+		$request->Objects = array($object);
+		$results = $this->client->Create($request);
 
-			return false;
+		if ($results->OverallStatus == "OK") {
+				return $sub;
+		}
+
+		$up = new EtErrorException();
+		$up->setRequest( $request );
+		$up->setResults( $results );
+
+		throw $up;
+
+		return false;
 	}
 
 	/**
 	 * Generic get/retrieve (recall - I needed a 6 letter word for get) function to call ET-Retrieve Request
 	 *
+	 * @author  Joe Sexton <joe.sexton@bigideas.com>
+	 * @author  Micah Breedlove <druid628@gmail.com> <micah.breedlove@blueshamrock.com>
 	 * @param Et[mixed] $class
 	 * @param array $properties
 	 * @return mixed | Object if successful boolean false if unsuccessful
+	 * @throws  EtErrorException
 	 *
 	 * $properties array(
 	 *              [0] =>
@@ -155,33 +158,34 @@ class EtClient extends EtBaseClass {
 	 *     )
 	 */
 	public function recall($class, $properties) {
-			$className = substr($class, 2);
 
-			$request = new EtRecallRequest();
-			$request->ObjectType = $className;
+		$className = substr($class, 2);
 
-			$request->Properties = $this->getDefinitionOfObject($className);
+		$request = new EtRecallRequest();
+		$request->ObjectType = $className;
 
-			$filter = new EtSimpleFilterPart();
-			foreach ($properties as $prop) {
-					$filter->Property = $prop['Name'];
-					$filter->Value = $prop['Value'];
-					$filter->SimpleOperator = constant(__NAMESPACE__."\EtSimpleOperators::" . strtoupper($prop['operator']));
-			}
+		$request->Properties = $this->getDefinitionOfObject($className);
 
-			$request->Filter = new \SoapVar($filter, SOAP_ENC_OBJECT, "SimpleFilterPart",  self::SOAPWSDL);
+		$filter = new EtSimpleFilterPart();
+		foreach ($properties as $prop) {
+				$filter->Property = $prop['Name'];
+				$filter->Value = $prop['Value'];
+				$filter->SimpleOperator = constant(__NAMESPACE__."\EtSimpleOperators::" . strtoupper($prop['operator']));
+		}
 
-			$requestMsg = new EtRecallRequestMsg();
-			$requestMsg->RetrieveRequest = $request;
-			$results = $this->client->Retrieve($requestMsg);
-			$nsClass = __NAMESPACE__ . "\\". $class;
-			if(isset($results->Results))
-			{
-					$recalledClass = $this->cast($results->Results, new $nsClass($this), $this);
-					return $recalledClass;
-			}
+		$request->Filter = new \SoapVar($filter, SOAP_ENC_OBJECT, "SimpleFilterPart",  self::SOAPWSDL);
 
-			return false;
+		$requestMsg = new EtRecallRequestMsg();
+		$requestMsg->RetrieveRequest = $request;
+		$results = $this->client->Retrieve($requestMsg);
+		$nsClass = __NAMESPACE__ . "\\". $class;
+		if(isset($results->Results))
+		{
+				$recalledClass = $this->cast($results->Results, new $nsClass($this), $this);
+				return $recalledClass;
+		}
+
+		return false;
 	}
 
 	/**
@@ -197,7 +201,6 @@ class EtClient extends EtBaseClass {
 	 */
 	public function update($class, $activeClass, $updateType = "UPDATEADD")
 	{
-
 		$nsClass = __NAMESPACE__ . "\\". $class;
 		if(!($activeClass instanceof $nsClass ))
 		{
@@ -262,17 +265,17 @@ class EtClient extends EtBaseClass {
 				return new \SoapVar($activeClass,
 									SOAP_ENC_OBJECT,
 									$className,
-									\druid628\exactTarget\EtClient::SOAPWSDL);
+									\joesexton00\exactTarget\EtClient::SOAPWSDL);
 			},
 			$activeClasses
 		);
 
-		$saveOption = new \druid628\exactTarget\EtSaveOption();
+		$saveOption = new \joesexton00\exactTarget\EtSaveOption();
 		$saveOption->PropertyName = $className;
 		$saveOption->SaveAction = constant("self::" . strtoupper($updateType));
-		$requestOptions = new \druid628\exactTarget\EtCreateOptions();
+		$requestOptions = new \joesexton00\exactTarget\EtCreateOptions();
 		$requestOptions->SaveOptions[] = new \SoapVar($saveOption, SOAP_ENC_OBJECT, "SaveOption", self::SOAPWSDL);
-		$request = new \druid628\exactTarget\EtCreateRequest();
+		$request = new \joesexton00\exactTarget\EtCreateRequest();
 		$request->Options = new \SoapVar($requestOptions, SOAP_ENC_OBJECT, "CreateOptions", self::SOAPWSDL);
 		$request->Objects = $objects;
 		$results = $this->client->Create($request);
@@ -376,32 +379,30 @@ class EtClient extends EtBaseClass {
 	 */
 	function getDefinitionOfObject($objectType) {
 
-			$lstProps = array();
-			try {
-					$request = new EtObjectDefinitionRequest();
-					$request->ObjectType = $objectType;
+		$lstProps = array();
 
-					$defRqstMsg = new EtDefinitionRequestMsg();
-					$defRqstMsg->DescribeRequests[] = new \SoapVar($request, SOAP_ENC_OBJECT, 'ObjectDefinitionRequest', self::SOAPWSDL);
+		$request = new EtObjectDefinitionRequest();
+		$request->ObjectType = $objectType;
 
-					/* Call the Retrieve method passing the instantiated ExactTarget_RetrieveRequestMsg object */
-					$status = $this->client->Describe($defRqstMsg);
-					$results = $status->ObjectDefinition;
+		$defRqstMsg = new EtDefinitionRequestMsg();
+		$defRqstMsg->DescribeRequests[] = new \SoapVar($request, SOAP_ENC_OBJECT, 'ObjectDefinitionRequest', self::SOAPWSDL);
 
-					if (count($results->Properties) > 0) {
+		/* Call the Retrieve method passing the instantiated ExactTarget_RetrieveRequestMsg object */
+		$status = $this->client->Describe($defRqstMsg);
+		$results = $status->ObjectDefinition;
 
-							$properties = $results->Properties;
-							foreach ($properties as $letter) {
-									if ($letter->IsRetrievable == true) {
-											$lstProps[] = $letter->Name;
-									}
-							}
-					}
+		if (count($results->Properties) > 0) {
 
-					return $lstProps;
-			} catch ( \SoapFault $e ) {
-				throw $e;
-			}
+				$properties = $results->Properties;
+				foreach ($properties as $letter) {
+						if ($letter->IsRetrievable == true) {
+								$lstProps[] = $letter->Name;
+						}
+				}
+		}
+
+		return $lstProps;
+
 	}
 
 
@@ -431,32 +432,37 @@ class EtClient extends EtBaseClass {
 	 */
 	public function simpleQuery($eventType, $filter)
 	{
-			if(!in_array(strtolower($eventType), array_keys($this->eventProperties)) || !is_array($filter))
-			{
-				return false;
-			}
-			if(!isset($filter['operator']))
-			{
-				$filter['operator'] = EtSimpleOperators::EQUALS;
-			}
+		if(!in_array(strtolower($eventType), array_keys($this->eventProperties)) || !is_array($filter))
+		{
+			return false;
+		}
+		if(!isset($filter['operator']))
+		{
+			$filter['operator'] = EtSimpleOperators::EQUALS;
+		}
 
-			$event = new EtRecallRequest();
-			$event->setObjectType($eventType.'Event');
-			$event->setProperties($this->eventProperties[strtolower($eventType)]);
-				$event_sfp = new EtSimpleFilterPart();
-				$event_sfp->Value = array($filter['value']);
-				$event_sfp->SimpleOperator = $filter['operator'];
-				$event_sfp->Property = $filter['key'];
-			$event->Filter = $this->soapCall($event_sfp);
-			$event->Options = null;
+		$event = new EtRecallRequest();
+		$event->setObjectType($eventType.'Event');
+		$event->setProperties($this->eventProperties[strtolower($eventType)]);
+			$event_sfp = new EtSimpleFilterPart();
+			$event_sfp->Value = array($filter['value']);
+			$event_sfp->SimpleOperator = $filter['operator'];
+			$event_sfp->Property = $filter['key'];
+		$event->Filter = $this->soapCall($event_sfp);
+		$event->Options = null;
 
-			$event_msg = new EtRecallRequestMsg();
-			$event_msg->setRecallRequest($event);
-			$event_result = $this->client->Retrieve($event_msg);
-			if ($event_result->OverallStatus == 'OK') {
-				return $event_result->Results;
-			}
+		$event_msg = new EtRecallRequestMsg();
+		$event_msg->setRecallRequest($event);
+		$event_result = $this->client->Retrieve($event_msg);
+		if ($event_result->OverallStatus == 'OK') {
+			return $event_result->Results;
+		}
 
+		$up = new EtErrorException();
+		$up->setRequest( $event_msg );
+		$up->setResults( $event_result );
+
+		throw $up;
 	}
 
 	/**

@@ -1,15 +1,15 @@
 <?PHP
 
-namespace druid628\exactTarget;
+namespace joesexton00\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
+use joesexton00\exactTarget\EtBaseClass;
 
 /**
  * EtEmail (Active Class)
- * 
- * Active Classes accept an instance of druid628\exactTarget\EtClient
- * to communicate with the Exact Target server. 
- * 
+ *
+ * Active Classes accept an instance of joesexton00\exactTarget\EtClient
+ * to communicate with the Exact Target server.
+ *
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com>
  * @version 1.0
@@ -34,20 +34,20 @@ class EtEmail extends EtBaseClass {
         public $ContentCheckStatus;    // String
 
         /**
-         * allow for passing optional client class to [some] Et-classes 
+         * allow for passing optional client class to [some] Et-classes
          * so they can take advantage of client specific functions.
          * e.g. send() and save()
          *
-         * @param druid628\exactTarget\EtClient $EtClient 
+         * @param joesexton00\exactTarget\EtClient $EtClient
          */
         public function __construct($EtClient = null) {
                 $this->client = $EtClient;
         }
 
         /**
-         * Used for setting client after class instantiation 
+         * Used for setting client after class instantiation
          *
-         * @param drudi628\exactTarget\EtClient $EtClient 
+         * @param drudi628\exactTarget\EtClient $EtClient
          */
         public function setClient($EtClient) {
                 $this->client = $EtClient;
@@ -56,7 +56,7 @@ class EtEmail extends EtBaseClass {
         /**
          * Get active client instance.
          *
-         * @return druid628\exactTarget\EtClient 
+         * @return joesexton00\exactTarget\EtClient
          */
         public function getClient() {
                 return $this->client;
@@ -73,7 +73,7 @@ class EtEmail extends EtBaseClass {
         /**
          * send() - uses client to send email
          *
-         * @return boolean 
+         * @return boolean
          */
         public function send() {
                 return $this->client->sendEmail($this, "Email");

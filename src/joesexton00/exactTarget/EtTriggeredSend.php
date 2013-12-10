@@ -1,16 +1,16 @@
 <?php
 
-namespace druid628\exactTarget;
+namespace joesexton00\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
-use druid628\exactTarget\EtClient;
+use joesexton00\exactTarget\EtBaseClass;
+use joesexton00\exactTarget\EtClient;
 
 /**
  * EtTriggeredSend (Active Class)
- * 
- * Active Classes accept an instance of druid628\exactTarget\EtClient
- * to communicate with the Exact Target server. 
- * 
+ *
+ * Active Classes accept an instance of joesexton00\exactTarget\EtClient
+ * to communicate with the Exact Target server.
+ *
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com>
  * @version 1.0
@@ -24,20 +24,20 @@ class EtTriggeredSend extends EtBaseClass {
         public $CustomerKey;             // String
 
         /**
-         * allow for passing optional client class to [some] Et-classes 
+         * allow for passing optional client class to [some] Et-classes
          * so they can take advantage of client specific functions.
          * e.g. send() and save()
          *
-         * @param druid628\exactTarget\EtClient $EtClient 
+         * @param joesexton00\exactTarget\EtClient $EtClient
          */
         public function __construct($EtClient = null) {
                 $this->client = $EtClient;
         }
 
         /**
-         * Used for setting client after class instantiation 
+         * Used for setting client after class instantiation
          *
-         * @param druid628\exactTarget\EtClient $EtClient 
+         * @param joesexton00\exactTarget\EtClient $EtClient
          */
         public function setClient($EtClient) {
                 $this->client = $EtClient;
@@ -46,7 +46,7 @@ class EtTriggeredSend extends EtBaseClass {
         /**
          * Get active client instance.
          *
-         * @return druid628\exactTarget\EtClient 
+         * @return joesexton00\exactTarget\EtClient
          */
         public function getClient() {
                 return $this->client;
@@ -54,9 +54,9 @@ class EtTriggeredSend extends EtBaseClass {
 
         /**
          * Use customer key ($custKey) as the triggered send key definition.
-         * 
+         *
          * @param type $custKey
-         * @param type $options 
+         * @param type $options
          */
         public function useKey($custKey, $options = array()) {
                 $tsd = new EtTriggeredSendDefinition();
@@ -72,9 +72,9 @@ class EtTriggeredSend extends EtBaseClass {
 
         /**
          * Shortcut function for getTriggeredSendDefinition()
-         * Gets TriggeredSendDefinition on ($this) triggered-send. 
-         * 
-         * @return \druid628\exactTarget\EtTriggeredSendDefinition
+         * Gets TriggeredSendDefinition on ($this) triggered-send.
+         *
+         * @return \joesexton00\exactTarget\EtTriggeredSendDefinition
          */
         public function getTSD()
         {
@@ -84,8 +84,8 @@ class EtTriggeredSend extends EtBaseClass {
         /**
          * Shortcut function for setTriggeredSendDefinition()
          * Sets triggered-send definition for ($this) triggered-send.
-         * 
-         * @param \druid628\exactTarget\EtTriggeredSendDefinition $triggeredSendDefinition 
+         *
+         * @param \joesexton00\exactTarget\EtTriggeredSendDefinition $triggeredSendDefinition
          */
         public function setTSD($triggeredSendDefinition)
         {
@@ -95,7 +95,7 @@ class EtTriggeredSend extends EtBaseClass {
         /**
          * send() - uses client to send email
          *
-         * @return boolean 
+         * @return boolean
          */
         public function send() {
                 return $this->client->sendEmail($this, "TriggeredSend");

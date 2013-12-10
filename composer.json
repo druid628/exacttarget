@@ -7,6 +7,11 @@
     "homepage": "https://github.com/joesexton00/exacttarget",
     "authors": [
         {
+            "name": "Joe Sexton",
+            "email": "joe@josephmsexton.com",
+            "homepage": "http://www.josephmsexton.com"
+        },
+        {
             "name": "Micah Breedlove",
             "email": "druid628@gmail.com",
             "homepage": "http://micah.breedlove.in/"
@@ -25,7 +30,7 @@
     },
     "autoload": {
         "psr-0": {
-            "druid628": "src/"
+            "joesexton00": "src/"
         }
     }
 }

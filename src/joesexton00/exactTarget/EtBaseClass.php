@@ -1,6 +1,6 @@
 <?PHP
 
-namespace druid628\exactTarget;
+namespace joesexton00\exactTarget;
 
 /**
  * EtBaseClass
@@ -60,22 +60,22 @@ abstract class EtBaseClass {
         public function __call($method, $arguments) {
 
             try {
-                    $verb = substr($method, 0, 3);
-                    if (in_array($verb, array('set', 'get'))) {
-                            $name = substr($method, 3);
-                    }
+                $verb = substr($method, 0, 3);
+                if (in_array($verb, array('set', 'get'))) {
+                        $name = substr($method, 3);
+                }
 
-                    if (method_exists($this, $verb)) {
-                            if (property_exists($this, $name)) {
-                                    return call_user_func_array(array($this, $verb), array_merge(array($name), $arguments));
-                            } elseif (property_exists($this, lcfirst($name))) {
-                                    return call_user_func_array(array($this, $verb), array_merge(array(lcfirst($name)), $arguments));
-                            } else {
-                                    throw new \Exception("Variable  ($name)  Not Found");
-                            }
-                    } else {
-                            throw new \Exception("Function ($verb) Not Defined");
-                    }
+                if (method_exists($this, $verb)) {
+                        if (property_exists($this, $name)) {
+                                return call_user_func_array(array($this, $verb), array_merge(array($name), $arguments));
+                        } elseif (property_exists($this, lcfirst($name))) {
+                                return call_user_func_array(array($this, $verb), array_merge(array(lcfirst($name)), $arguments));
+                        } else {
+                                throw new \Exception("Variable  ($name)  Not Found");
+                        }
+                } else {
+                        throw new \Exception("Function ($verb) Not Defined");
+                }
             } catch ( EtErrorException $e ) { // @todo jms-update
                 throw $e;
             } catch (\Exception $e) {
@@ -142,7 +142,7 @@ abstract class EtBaseClass {
          *
          * @param mixed $newClass - any Et-class
          *
-         * @see druid628\exactTarget\EtSubscriber
+         * @see joesexton00\exactTarget\EtSubscriber
          *
          */
         protected function reAssign($newClass) {

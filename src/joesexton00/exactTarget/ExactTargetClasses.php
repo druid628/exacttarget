@@ -1,8 +1,8 @@
-<?php 
+<?php
 
-namespace druid628\exactTarget;
+namespace joesexton00\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
+use joesexton00\exactTarget\EtBaseClass;
 
 /**
  * Collection of all other slightly-modified classes provided by ExactTarget
@@ -1469,19 +1469,19 @@ class EtRecallRequestMsg extends EtBaseClass {
    * setRecallRequest defines the RetrieveRequest parameter with the
    * given object (again, typically a RequestMsg object).
    *
-   * @param EtRecallRequestMsg $object 
+   * @param EtRecallRequestMsg $object
    */
   public function setRecallRequest($object) {
     $this->RetrieveRequest = $object;
   }
-  
+
   /**
    * Exact Target relies on Retrieve SOAP Requests containing a
    * RetrieveRequest parameter (typically a RequestMsg object) in
    * order to maintain consistancy of the use of Recall the method
    * getRecallRequest returns the RetrieveRequest parameter.
    *
-   * @return EtRecallRequestMsg 
+   * @return EtRecallRequestMsg
    */
   public function getRecallRequest() {
     return $this->RetrieveRequest;

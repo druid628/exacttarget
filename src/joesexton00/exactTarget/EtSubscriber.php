@@ -1,14 +1,14 @@
 <?PHP
 
-namespace druid628\exactTarget;
+namespace joesexton00\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
-use druid628\exactTarget\EtSubscriberList;
+use joesexton00\exactTarget\EtBaseClass;
+use joesexton00\exactTarget\EtSubscriberList;
 
 /**
 * EtSubscriber (Active Class)
 *
-* Active Classes accept an instance of druid628\exactTarget\EtClient
+* Active Classes accept an instance of joesexton00\exactTarget\EtClient
 * to communicate with the Exact Target server.
 *
 * @package exactTarget
@@ -25,8 +25,6 @@ class EtSubscriber extends EtBaseClass {
 
 	private $_new = true;
 	protected $client;
-	public $ID;                        // user ID
-	public $IDSpecified;               // user IDSpecified
 	public $EmailAddress;              // String
 	public $Attributes;                // array() of EtAttribute
 	public $SubscriberKey;             // String
@@ -38,13 +36,12 @@ class EtSubscriber extends EtBaseClass {
 	public $GlobalUnsubscribeCategory; // EtGlobalUnsubscribeCategory
 	public $SubscriberTypeDefinition;  // EtSubscriberTypeDefinition
 
-
 	/**
 	 * allow for passing optional client class to [some] Et-classes
 	 * so they can take advantage of client specific functions.
 	 * e.g. send() and save()
 	 *
-	 * @param druid628\exactTarget\EtClient $EtClient
+	 * @param joesexton00\exactTarget\EtClient $EtClient
 	 */
 	public function __construct($EtClient = null) {
 			$this->client = $EtClient;
@@ -53,7 +50,7 @@ class EtSubscriber extends EtBaseClass {
 	/**
 	 * Used for setting client after class instantiation
 	 *
-	 * @param druid628\exactTarget\EtClient $EtClient
+	 * @param joesexton00\exactTarget\EtClient $EtClient
 	 */
 	public function setClient($EtClient) {
 			$this->client = $EtClient;
@@ -62,7 +59,7 @@ class EtSubscriber extends EtBaseClass {
 	/**
 	 * Get active client instance.
 	 *
-	 * @return druid628\exactTarget\EtClient
+	 * @return joesexton00\exactTarget\EtClient
 	 */
 	public function getClient() {
 			return $this->client;
@@ -80,41 +77,47 @@ class EtSubscriber extends EtBaseClass {
 	 * find() - find give find at least a subscriberKey (email addy) and it will
 	 * recall a subscriber.
 	 *
-	 * @param string $subscriberKey
-	 * @param string $emailAddress
-	 * @param array $options - Multidimensional array of other optional data about a subscriber should be in the following co
+	 * @author 	Micah Breedlove <druid628@gmail.com>
+	 * @author 	Joe Sexton <joe.sexton@bigideas.com>
+	 * @param 	string $subscriberKey optional, find by subscriber key or email address
+	 * @param 	string $emailAddress optional, find by subscriber key or email address
+	 * @param 	array $options - Multidimensional array of other optional data about a subscriber should be in the following co
 	 *         array(
 	 *             'Name'     => 'SubscriberKey',
 	 *             'operator' => 'equals',
 	 *             'Value'    => $subscriberKey,
 	 *         ),
 	 */
-	public function find($subscriberKey, $emailAddress = null, $options = array()) {
-			$subscriberInfo = array(
-				 array(
-					  'Name' => 'SubscriberKey',
-					  'operator' => 'equals',
-					  'Value' => $subscriberKey,
-				 ),
+	public function find( $subscriberKey = null, $emailAddress = null, $options = array() ) {
+
+		$subscriberInfo = array();
+
+		if ( !is_null( $subscriberKey ) ) {
+			$subscriberInfo[] = array(
+				  'Name' => 'SubscriberKey',
+				  'operator' => 'equals',
+				  'Value' => $subscriberKey,
 			);
+		}
 
-			if (!is_null($emailAddress)) {
-					$subscriberInfo[] = array(
-						 'Name' => 'EmailAddress',
-						 'operator' => 'equals',
-						 'Value' => $emailAddress,
-					);
-			}
-			if (!empty($options)) {
-					$subscriberInfo = array_merge($subscriberInfo, $options);
-			}
+		if ( !is_null( $emailAddress ) ) {
+			$subscriberInfo[] = array(
+				 'Name' => 'EmailAddress',
+				 'operator' => 'equals',
+				 'Value' => $emailAddress,
+			);
+		}
+		if ( !empty( $options ) ) {
+				$subscriberInfo = array_merge( $subscriberInfo, $options );
+		}
 
-			if ($newSub = $this->client->recallSubscriber($subscriberInfo)) {
-					$this->reAssign($newSub);
-					$this->isNotNew();
-			} else {
-					$this->populateNew($subscriberInfo);
-			}
+		if ( $newSub = $this->client->recallSubscriber( $subscriberInfo ) ) {
+				$this->reAssign( $newSub );
+				$this->isNotNew();
+		} else {
+				$this->populateNew( $subscriberInfo );
+		}
+
 	}
 
 	/**
@@ -155,13 +158,13 @@ class EtSubscriber extends EtBaseClass {
 	 * OR
 	 * Adds an EtAttribute  to the current subscriber.
 	 *
-	 * @param druid628\exactTarget\EtAttribute $EtAttribute
+	 * @param joesexton00\exactTarget\EtAttribute $EtAttribute
 	 * @return boolean
 	 * @throws \Exception
 	 */
 	public function updateAttribute($EtAttribute) {
-		if (!($EtAttribute instanceof \druid628\exactTarget\EtAttribute)) {
-				throw new \Exception(" updateAttribute expects an instance of \druid628\exactTarget\EtAttribute and was given " . get_class($EtAttribute) . ". ");
+		if (!($EtAttribute instanceof \joesexton00\exactTarget\EtAttribute)) {
+				throw new \Exception(" updateAttribute expects an instance of \joesexton00\exactTarget\EtAttribute and was given " . get_class($EtAttribute) . ". ");
 		}
 		$nameToUpdate = $EtAttribute->getName();
 		$attributes = $this->getAttributes();
@@ -180,36 +183,27 @@ class EtSubscriber extends EtBaseClass {
 	}
 
 	/**
-	 * addToList
+	 * updateListStatus
 	 *
 	 * @author  Joe Sexton <joe.sexton@bigideas.com>
 	 * @author  Micah Breedlove <druid628@gmail.com> <micah.breedlove@blueshamrock.com>
 	 * @param 	int $listId EtList->getID()
 	 * @param 	string $status
+	 * @param 	boolean $new
 	 */
-	public function addToList( $listId, $status = null ) {
-		$slist = new EtSubscriberList();
-		$slist->setID($listId);
-		$slist->setAction("create");
-		$slist->setStatus($status);
-		$list = $this->client->soapCall($slist);
-		$this->Lists[] = $list;
-	}
+	public function updateListStatus( $listId, $status = null, $new = true ) {
 
-	/**
-	 * updateListStatus
-	 *
-	 * @author  Joe Sexton <joe.sexton@bigideas.com>
-	 * @param   int $listId EtList->getID()
-	 * @param   string $status
-	 */
-	public function updateListStatus( $listId, $status ) {
 		$slist = new EtSubscriberList();
 		$slist->setID( $listId );
-		$slist->setAction( "Update" );
 		$slist->setStatus( $status );
-		$list = $this->client->soapCall( $slist );
-		$this->Lists[] = $list;
+
+		if ( $new === true ) {
+			$slist->setAction( "create" );
+		} else {
+			$slist->setAction( "Update" );
+		}
+
+		$this->Lists[] = $this->client->soapCall( $slist );
 	}
 
 	/**
@@ -221,45 +215,31 @@ class EtSubscriber extends EtBaseClass {
 	 */
 	public function getSubscribersLists( $subscriberKey )
 	{
-		try{
-			$rr = new EtRecallRequest();
-			$rr->ObjectType = 'ListSubscriber';
+		$request = new EtRecallRequest();
+		$request->ObjectType = 'ListSubscriber';
+		$request->Properties = array( "ListID", "SubscriberKey", "Status" );
 
-			//Set the properties to return
-			$props = array( "ListID", "SubscriberKey", "Status" );
-			$rr->Properties = $props;
+		$filter = new EtSimpleFilterPart();
+		$filter->Property = 'SubscriberKey';
+		$filter->Value = array( $subscriberKey );
+		$filter->SimpleOperator = EtSimpleOperators::EQUALS;
 
-			//Setup account filtering, to look for a given account MID
-			$filterPart = new EtSimpleFilterPart();
-			$filterPart->Property = 'SubscriberKey';
-			$values = array( $subscriberKey );
-			$filterPart->Value = $values;
-			$filterPart->SimpleOperator = EtSimpleOperators::EQUALS;
+		$request->Filter = new \SoapVar( $filter, SOAP_ENC_OBJECT, 'SimpleFilterPart', EtClient::SOAPWSDL );
 
-			//Encode the SOAP package
-			$filterPart = new \SoapVar( $filterPart, SOAP_ENC_OBJECT,'SimpleFilterPart', EtClient::SOAPWSDL );
+		// Setup and execute request
+		$requestMessage = new EtRecallRequestMsg();
+		$requestMessage->RetrieveRequest = $request;
+		$results = $this->client->getClient()->Retrieve( $requestMessage );
 
-			$rr->Filter = $filterPart;
+		if ( !empty( $results->Results ) ) {
 
-			//Setup and execute request
-			$rrm = new EtRecallRequestMsg();
-			$rrm->RetrieveRequest = $rr;
-			$results = $this->client->getClient()->Retrieve( $rrm );
+			return $results->Results;
 
-			if ( !empty( $results->Results ) ) {
+		} else {
 
-				return $results->Results;
-
-			} // end if
-
-		} catch ( \SoapFault $e ) {
-			throw $e;
+			return null;
 		}
-
-		return null;
-
-	} // end getSubscribersLists()
-
+	}
 
 	/**
 	 * Sets the object into a not new status
@@ -277,6 +257,26 @@ class EtSubscriber extends EtBaseClass {
 	 */
 	public function isNew() {
 			return $this->_new;
+	}
+
+	/**
+	 * init
+	 *
+	 * @author	Joe Sexton <joe.sexton@bigideas.com>
+	 */
+	public function init() {
+
+		$this->_new                      = true;
+		$this->EmailAddress              = null;
+		$this->Attributes                = null;
+		$this->SubscriberKey             = null;
+		$this->UnsubscribedDate          = null;
+		$this->Status                    = null;
+		$this->PartnerType               = null;
+		$this->EmailTypePreference       = null;
+		$this->Lists                     = null;
+		$this->GlobalUnsubscribeCategory = null;
+		$this->SubscriberTypeDefinition  = null;
 	}
 
 }

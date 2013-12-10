@@ -1,15 +1,15 @@
 <?PHP
-namespace druid628\exactTarget;
+namespace joesexton00\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
+use joesexton00\exactTarget\EtBaseClass;
 
 /**
  * EtAttribute (Passive Class)
- * 
- * Passive classes do not directly communicate with the Exact Target server. 
- * 
+ *
+ * Passive classes do not directly communicate with the Exact Target server.
+ *
  * @package exactTarget
- * @author Micah Breedlove <druid628@gmail.com>
+ * @author Micah Breedlove <joesexton00@gmail.com>
  * @version 1.0
  */
 

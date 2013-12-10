@@ -1,13 +1,13 @@
 <?php
-namespace druid628\exactTarget\lib;
+namespace joesexton00\exactTarget\lib;
 
 use \DOMXpath;
-use druid628\exactTarget\lib\XMLSecEnc;
-use druid628\exactTarget\lib\XMLSecurityDSig;
-use druid628\exactTarget\lib\XMLSecurityKey;
+use joesexton00\exactTarget\lib\XMLSecEnc;
+use joesexton00\exactTarget\lib\XMLSecurityDSig;
+use joesexton00\exactTarget\lib\XMLSecurityKey;
 
 /**
- * Class provided by Exact Target 
+ * Class provided by Exact Target
  */
 class WSSESoap {
 	const WSSENS  = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
@@ -21,7 +21,7 @@ class WSSESoap {
 	private $SOAPXPath = NULL;
 	private $secNode   = NULL;
 	public $signAllHeaders = FALSE;
-	
+
 	private function locateSecurityHeader($bMustUnderstand = TRUE, $setActor = NULL) {
 		if ($this->secNode == NULL) {
 			$headers = $this->SOAPXPath->query('//wssoap:Envelope/wssoap:Header');
@@ -88,7 +88,7 @@ class WSSESoap {
 		if ($passwordDigest && empty($password)) {
 			throw new Exception("Cannot calculate the digest without a password");
 		}
-		
+
 		$security = $this->locateSecurityHeader();
 
 		$token = $this->soapDoc->createElementNS(WSSESoap::WSSENS, WSSESoap::WSSEPFX.':UsernameToken');
@@ -96,13 +96,13 @@ class WSSESoap {
 
 		$username = $this->soapDoc->createElementNS(WSSESoap::WSSENS,  WSSESoap::WSSEPFX.':Username', $userName);
 		$token->appendChild($username);
-		
+
 		/* Generate nonce - create a 256 bit session key to be used */
 		$objKey = new XMLSecurityKey(XMLSecurityKey::AES256_CBC);
 		$nonce = $objKey->generateSessionKey();
 		unset($objKey);
 		$createdate = gmdate("Y-m-d\TH:i:s").'Z';
-		
+
 		if ($password) {
 			$passType = WSSESoap::WSUNAME.'#PasswordText';
 			if ($passwordDigest) {
@@ -131,10 +131,10 @@ class WSSESoap {
 		$token->setAttribute('EncodingType', 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary');
 		$token->setAttributeNS(WSSESoap::WSUNS, WSSESoap::WSUPFX.':Id', XMLSecurityDSig::generate_GUID());
 		$token->setAttribute('ValueType', 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3');
-		
+
 		return $token;
 	}
-	
+
 	public function attachTokentoSig($token) {
 		if (! ($token instanceof DOMElement)) {
 			throw new Exception('Invalid parameter: BinarySecurityToken element expected');
@@ -150,7 +150,7 @@ class WSSESoap {
 				$keyInfo = $objXMLSecDSig->createNewSignNode('KeyInfo');
 				$objDSig->appendChild($keyInfo);
 			}
-			
+
 			$tokenRef = $this->soapDoc->createElementNS(WSSESoap::WSSENS, WSSESoap::WSSEPFX.':SecurityTokenReference');
 			$keyInfo->appendChild($tokenRef);
 			$reference = $this->soapDoc->createElementNS(WSSESoap::WSSENS, WSSESoap::WSSEPFX.':Reference');
@@ -175,7 +175,7 @@ class WSSESoap {
 
 		if ($this->signAllHeaders) {
 			foreach ($this->secNode->parentNode->childNodes AS $node) {
-				if (($node->nodeType == XML_ELEMENT_NODE) && 
+				if (($node->nodeType == XML_ELEMENT_NODE) &&
 				($node->namespaceURI != WSSESoap::WSSENS)) {
 					$arNodes[] = $node;
 				}
@@ -188,7 +188,7 @@ class WSSESoap {
 				break;
 			}
 		}
-		
+
 		$arOptions = array('prefix'=>WSSESoap::WSUPFX, 'prefix_ns'=>WSSESoap::WSUNS);
 		$objDSig->addReferenceList($arNodes, XMLSecurityDSig::SHA1, NULL, $arOptions);
 
@@ -211,7 +211,7 @@ class WSSESoap {
 		if (! empty($key->guid)) {
 			return TRUE;
 		}
-		
+
 		$lastToken = NULL;
 		$findTokens = $security->firstChild;
 		while ($findTokens) {
@@ -297,7 +297,7 @@ class WSSESoap {
 			$this->AddReference($enc->encKey, $guid);
 		}
 	}
-	
+
 	public function saveXML() {
 		return $this->soapDoc->saveXML();
 	}

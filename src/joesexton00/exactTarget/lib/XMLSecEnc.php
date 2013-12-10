@@ -1,9 +1,9 @@
 <?PHP
 
-namespace druid628\exactTarget\lib;
+namespace joesexton00\exactTarget\lib;
 
 /**
- * Class provided by Exact Target 
+ * Class provided by Exact Target
  */
 class XMLSecEnc {
 

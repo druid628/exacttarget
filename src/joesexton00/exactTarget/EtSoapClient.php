@@ -1,16 +1,16 @@
-<?php 
+<?php
 
-namespace druid628\exactTarget;
+namespace joesexton00\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
-use druid628\exactTarget\lib\WSSESoap;
+use joesexton00\exactTarget\EtBaseClass;
+use joesexton00\exactTarget\lib\WSSESoap;
 
 
 /**
- * EtSoapClient 
- * 
+ * EtSoapClient
+ *
  * The SOAP request handler.
- * 
+ *
  * @package exactTarget
  * @author Micah Breedlove <druid628@gmail.com>
  * @version 1.0
