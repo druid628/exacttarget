@@ -5,7 +5,7 @@ ExactTargetComponent
 **Uses:** EtBaseClass.php<br>
 **Version:** 1.1<br>
 
-This is a fork of [Micah Breedloves Exact Target bundle](https://github.com/druid628/exacttarget) and builds on his work to add Data Extension functionality and a few other features.  Much credit is due to him for this bundle!
+This is a fork of [Micah Breedlove's Exact Target bundle](https://github.com/druid628/exacttarget) and builds on his work to add Data Extension functionality and a few other features.  Much credit is due to him for this bundle!
 
 General
 ----------
