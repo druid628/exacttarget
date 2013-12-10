@@ -5,7 +5,7 @@ ExactTargetComponent
 **Uses:** EtBaseClass.php<br>
 **Version:** 1.1<br>
 
-This is a fork of [Micah Breedlove's Exact Target bundle](https://github.com/druid628/exacttarget) and builds on his work to add Data Extension functionality and a few other features.  Much credit is due to him for this bundle!!
+This is a fork of [Micah Breedlove's Exact Target bundle](https://github.com/druid628/exacttarget) and builds on his work to add Data Extension functionality and a few other features.  Much credit is due to him for this bundle!
 
 General
 ----------
@@ -173,7 +173,7 @@ eliminates the need for calling the client sendEmail yourself.
 ###1.0.2
 ####composer
 Added lib-openssl and ext-mcrypt to composer.json file
-###1.1
+###1.1.0
 #####New Features
 Added data extension wrapper and a few other features.
 
