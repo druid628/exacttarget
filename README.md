@@ -88,6 +88,20 @@ action.
     // execute send
     $ts->send();
 
+**Example (Data Extension)**:
+
+    // initialize
+    $this->dataExtension->init();
+
+    // retrieve the DE, specify which fields to get
+    $this->dataExtension->find( array( 'field1', 'field2', 'field3' ) );
+
+    // update a DE property using key/value pair
+    $this->dataExtension->updateProperty( 'key', 'value' );
+
+    // persist
+    $this->dataExtension->save();
+
 * * *
 
 EtClient
