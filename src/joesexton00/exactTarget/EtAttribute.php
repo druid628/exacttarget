@@ -9,7 +9,7 @@ use joesexton00\exactTarget\EtBaseClass;
  * Passive classes do not directly communicate with the Exact Target server.
  *
  * @package exactTarget
- * @author Micah Breedlove <joesexton00@gmail.com>
+ * @author Micah Breedlove <druid628@gmail.com>
  * @version 1.0
  */
 
