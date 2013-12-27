@@ -215,8 +215,6 @@ class EtDataExtensionWrapper extends EtBaseClass {
 			$results = $this->client->getClient()->Update( $request );
 		}
 
-		var_dump( $results ); // @todo remove
-
 		if ( $results->OverallStatus !== "OK" ) {
 
 			$up = new EtErrorException();
@@ -259,7 +257,6 @@ class EtDataExtensionWrapper extends EtBaseClass {
 
 			throw $up;
 		}
-		var_dump( $results ); // @todo remove
 
 		return true;
 	}
