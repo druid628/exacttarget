@@ -24,11 +24,6 @@
         "lib-openssl" : "*",
         "ext-mcrypt"  : "*"
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.1.x-dev"
-        }
-    },
     "autoload": {
         "psr-0": {
             "joesexton00": "src/"
