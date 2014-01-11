@@ -4,11 +4,9 @@ namespace druid628\exactTarget;
 
 use druid628\exactTarget\EtBaseClass;
 use druid628\exactTarget\EtSoapClient;
-use druid628\exactTarget\EtSubscriber;
 use druid628\exactTarget\EtSimpleOperators;
 use druid628\exactTarget\EtTriggeredSend;
 use druid628\exactTarget\EtTriggeredSendDefinition;
-
 
 /**
  * EtClient - ExactTarget SOAP client

@@ -86,4 +86,3 @@ class EtEmail extends EtBaseClass
     }
 
 }
-
