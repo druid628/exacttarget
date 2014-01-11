@@ -1,3 +1,4 @@
+
 <?PHP
 
 namespace druid628\exactTarget;
@@ -19,9 +20,10 @@ use druid628\exactTarget\EtTriggeredSendDefinition;
  * @property const        UPDATEADD
  * @property const        UPDATEONLY
  *
+ * @property EtSoapClient $client
+ * @property string       $serverInstance
  * @property string       $wsdl
  * @property array        $validSendTypes
- * @property EtSoapClient $client
  *
  * @package exactTarget
  * @author  Micah Breedlove <druid628@gmail.com> <micah.breedlove@blueshamrock.com>
@@ -29,7 +31,6 @@ use druid628\exactTarget\EtTriggeredSendDefinition;
  */
 class EtClient extends EtBaseClass
 {
-
     // Exact Target API WSDL
     const SOAPWSDL = "http://exacttarget.com/wsdl/partnerAPI";
     // Save Actions
@@ -56,6 +57,7 @@ class EtClient extends EtBaseClass
     );
 
     protected $client;
+    protected $serverInstance;
     protected $wsdl;
     protected $validSendTypes = array(
         "SMSTriggeredSend",
@@ -63,19 +65,45 @@ class EtClient extends EtBaseClass
         "TriggeredSend",
     );
 
-
-    public function __construct($username, $password, $serverinstance = 's4')
+    /**
+     * Build An authenticated SoapClient for use with Exact Target
+     *
+     * @param String $username       Exact Target username
+     * @param String $password       Exact Target password
+     * @param String $serverInstance Exact Target Server/Instance (e.g. ""; "s4"; "s6")
+     *
+     */
+    public function __construct($username, $password, $serverInstance = '')
     {
 
-        if ($serverinstance != '') {
-            $serverinstance .= ".";
-        }
-
-        $this->wsdl = "https://webservice." . $serverinstance . "exacttarget.com/etframework.wsdl";
+        $this->setServer($serverInstance);
 
         $this->client           = new EtSoapClient($this->wsdl, array('trace' => 1));
         $this->client->username = $username;
         $this->client->password = $password;
+    }
+
+    /**
+     * What server am I connected to?
+     *
+     * @return String (e.g. ""; "s4"; "s6")
+     */
+    public function getServer()
+    {
+        return $this->serverInstance;
+    }
+
+    public function setServer($serverInstance = '')
+    {
+        $this->serverInstance = $serverInstance;
+
+        $this->serverInstance = $serverInstance;
+        if ($serverInstance != '') {
+            $serverInstance .= ".";
+        }
+
+
+        $this->wsdl = "https://webservice." . $serverinstance . "exacttarget.com/etframework.wsdl";
     }
 
     /**
@@ -231,7 +259,6 @@ class EtClient extends EtBaseClass
 
         return $updatedClass;
 
-
     }
 
     /**
@@ -320,7 +347,6 @@ class EtClient extends EtBaseClass
         return false;
     }
 
-
     /**
      *
      * @param string $triggeredSendKey
@@ -340,7 +366,6 @@ class EtClient extends EtBaseClass
 
         $ts = new EtTriggeredSend($this);
         $ts->setTriggeredSendDefinition(new \SoapVar($tsd, SOAP_ENC_OBJECT, "TriggeredSendDefinition", self::SOAPWSDL));
-
 
         // return the triggeredSend to allow you to add subscribers or whatever you need to do
         return $ts;
@@ -381,7 +406,6 @@ class EtClient extends EtBaseClass
      */
     function getDefinitionOfObject($objectType)
     {
-
         $lstProps = array();
         try {
             $request             = new EtObjectDefinitionRequest();
@@ -411,7 +435,6 @@ class EtClient extends EtBaseClass
             var_dump($e);
         }
     }
-
 
     /**
      * Used for soapCalls outside of EtClient. EtClient methods should be updated to use this function
