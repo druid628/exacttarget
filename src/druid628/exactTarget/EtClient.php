@@ -102,7 +102,7 @@ class EtClient extends EtBaseClass
         }
 
 
-        $this->wsdl = "https://webservice." . $serverinstance . "exacttarget.com/etframework.wsdl";
+        $this->wsdl = "https://webservice." . $serverInstance . "exacttarget.com/etframework.wsdl";
     }
 
     /**
