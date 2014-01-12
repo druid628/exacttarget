@@ -347,6 +347,7 @@ class EtClient extends EtBaseClass
     }
 
     /**
+     * buildTriggeredSend object
      *
      * @param string $triggeredSendKey
      * @param array  $options
@@ -371,6 +372,7 @@ class EtClient extends EtBaseClass
     }
 
     /**
+     * Executes send
      *
      * @param mixed  $email
      * @param string $sendType - <classOf> $email  Known Valid Send types:  "TriggeredSend","SMSTriggeredSend","Send"

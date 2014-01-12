@@ -19,7 +19,6 @@ class EtAttribute extends EtBaseClass
     public $Name; // string
     public $Value; // string
 
-
     public function __construct($name = null, $value = null)
     {
         if (!is_null($name)) {
@@ -29,10 +28,5 @@ class EtAttribute extends EtBaseClass
             $this->Value = $value;
         }
     }
-if (!is_null($value))
-{
-$this->Value = $value;
-}
-}
 
 }

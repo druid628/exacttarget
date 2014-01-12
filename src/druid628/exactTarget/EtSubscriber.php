@@ -114,7 +114,7 @@ class EtSubscriber extends EtBaseClass
 
         if ($newSub = $this->client->recallSubscriber($subscriberInfo)) {
             $this->reAssign($newSub);
-            $this->isNotNew();
+            $this->setNotNew();
         } else {
             $this->populateNew($subscriberInfo);
         }
@@ -183,7 +183,6 @@ class EtSubscriber extends EtBaseClass
     }
 
     /**
-     *
      * @param int $listId EtList->getID()
      */
     public function addToList($listId)
@@ -198,11 +197,13 @@ class EtSubscriber extends EtBaseClass
     /**
      * Sets the object into a not new status
      *
-     * @return void
+     * @return $this
      */
-    private function isNotNew()
+    private function setNotNew()
     {
         $this->_new = false;
+
+        return $this;
     }
 
     /**
