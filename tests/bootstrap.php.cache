@@ -1,0 +1,21 @@
+<?PHP
+
+spl_autoload_register(null, false);
+
+spl_autoload_extensions('.php');
+
+
+/*** class loader ***/
+function classLoader($class)
+{
+    $filename = preg_replace("/\\\/", "" . DIRECTORY_SEPARATOR. "", $class);
+    $fullPath = __DIR__. "/../src/" . $filename . ".php";
+
+    if(!file_exists($fullPath)) {
+        return false;
+    }
+
+    require_once($fullPath);
+}
+
+spl_autoload_register('classLoader');
