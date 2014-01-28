@@ -447,7 +447,11 @@ class EtClient extends EtBaseClass
     public function soapCall($object)
     {
         // get class of object, remove namespace, and strip off Et  .::.  Wicked voodoo magic
-        $classType = substr(end(explode('\\', get_class($object))), 2);
+        
+        // Fix to avoid "Only variables can be passed by reference" error.
+        $arr = explode('\\', get_class($object));
+        $classType = substr(end($arr), 2);
+        
         $suds      = new \SoapVar($object, SOAP_ENC_OBJECT, $classType, self::SOAPWSDL);
 
         return $suds;
