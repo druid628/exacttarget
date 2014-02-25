@@ -4,7 +4,7 @@ namespace druid628\exactTarget;
 
 use druid628\exactTarget\EtBaseClass;
 
-class EtObjectExtension extends EtBaseClass
+class EtObjectExtension extends EtAPIObject
 {
     public $Type; // String
     public $Properties; // EtProperties
