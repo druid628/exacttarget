@@ -2,7 +2,7 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
+use druid628\exactTarget\EtObjectExtension;
 
 class EtDataExtensionObject extends EtObjectExtension
 {
