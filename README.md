@@ -21,6 +21,23 @@ Source:
   
 Presentation: <http://prezi.com/p4ckcmlimnyi/exacttarget-component/?kw=view-p4ckcmlimnyi&rc=ref-13751401>
   
+Installation  
+----------
+
+### Packagist
+
+Add exacttarget to your composer.json
+
+    {
+        "require": {
+                "druid628/exacttarget": "dev-master"
+        }
+    }
+
+Next run a composer update
+
+    $ php composer.phar update druid628/exacttarget
+
 
 Usage  
 ----------
