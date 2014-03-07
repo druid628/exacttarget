@@ -165,19 +165,24 @@ example of their useage see the Usage heading below).
 
 CHANGELOG  
 ----------
-###1.0  
-####Client Access
+### 1.0  
+#### Client Access
 EtEmail, EtList, EtSubscriber, and EtTriggeredSend all now can be 
 passed the EtClient allowing for save and send functions (see below).
-####Save Methods
+#### Save Methods
 EtEmail, EtList and EtSubscriber objects now have a save() method which 
 eliminates the need for calling the client update yourself.
-####Send Methods
+#### Send Methods
 EtEmail and EtTriggeredSend objects now have a send() method which 
 eliminates the need for calling the client sendEmail yourself.
-###1.0.2
-####composer
+### 1.0.2
+#### composer
 Added lib-openssl and ext-mcrypt to composer.json file
+### 1.0.3
+#### Additions
+
+ * Added unit tests
+ * Added Exception classes
 
 
 * * *
