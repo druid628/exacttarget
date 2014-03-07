@@ -6,10 +6,10 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtSaveAction extends EtBaseClass
 {
-    const AddOnly    = 'AddOnly';
-    const _Default   = 'Default';
-    const Nothing    = 'Nothing';
-    const UpdateAdd  = 'UpdateAdd';
-    const UpdateOnly = 'UpdateOnly';
+    const ADDONLY    = 'AddOnly';
+    const _DEFAULT   = 'Default';
+    const NOTHING    = 'Nothing';
+    const UPDATEADD  = 'UpdateAdd';
+    const UPDATEONLY = 'UpdateOnly';
 }
 
