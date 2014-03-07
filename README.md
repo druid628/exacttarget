@@ -5,6 +5,7 @@ ExactTargetComponent
 **Uses:** EtBaseClass.php  
 **Version:** 1.0  
 ![Project status](http://stillmaintained.com/druid628/exacttarget.png)  
+[![Build Status](https://travis-ci.org/druid628/exacttarget.png?branch=master)](https://travis-ci.org/druid628/exacttarget)  
 
 General  
 ----------
