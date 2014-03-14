@@ -75,4 +75,6 @@ Contributors
 ----------
  * Micah Breedlove - <https://github.com/druid628> - [@druid628](http://twitter.com/druid628)
  * Matt Rathbun  
+ * Ryder Ross - <https://github.com/ryross>
+ * brainbowler - <https://github.com/brainbowler>
 
