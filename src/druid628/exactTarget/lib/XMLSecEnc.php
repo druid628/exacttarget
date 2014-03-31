@@ -12,13 +12,13 @@ use \DOMNode;
  */
 class XMLSecEnc {
 
-        const template = "<xenc:EncryptedData xmlns:xenc='http://www.w3.org/2001/04/xmlenc#'>
+        const TEMPLATE = "<xenc:EncryptedData xmlns:xenc='http://www.w3.org/2001/04/xmlenc#'>
                              <xenc:CipherData>
                                    <xenc:CipherValue></xenc:CipherValue>
                              </xenc:CipherData>
                           </xenc:EncryptedData>";
-        const Element = 'http://www.w3.org/2001/04/xmlenc#Element';
-        const Content = 'http://www.w3.org/2001/04/xmlenc#Content';
+        const ELEMENT = 'http://www.w3.org/2001/04/xmlenc#Element';
+        const CONTENT = 'http://www.w3.org/2001/04/xmlenc#Content';
         const URI = 3;
         const XMLENCNS = 'http://www.w3.org/2001/04/xmlenc#';
 
@@ -29,7 +29,7 @@ class XMLSecEnc {
 
         public function __construct() {
                 $this->encdoc = new DOMDocument();
-                $this->encdoc->loadXML(XMLSecEnc::template);
+                $this->encdoc->loadXML(XMLSecEnc::TEMPLATE);
         }
 
         public function setNode($node) {
@@ -52,20 +52,19 @@ class XMLSecEnc {
                         throw new Exception('Error locating CipherValue element within template');
                 }
                 switch ($this->type) {
-                        case (XMLSecEnc::Element):
+                        case (XMLSecEnc::ELEMENT):
                                 $data = $doc->saveXML($this->rawNode);
-                                $this->encdoc->documentElement->setAttribute('Type', XMLSecEnc::Element);
+                                $this->encdoc->documentElement->setAttribute('Type', XMLSecEnc::ELEMENT);
                                 break;
-                        case (XMLSecEnc::Content):
+                        case (XMLSecEnc::CONTENT):
                                 $children = $this->rawNode->childNodes;
                                 foreach ($children AS $child) {
                                         $data .= $doc->saveXML($child);
                                 }
-                                $this->encdoc->documentElement->setAttribute('Type', XMLSecEnc::Content);
+                                $this->encdoc->documentElement->setAttribute('Type', XMLSecEnc::CONTENT);
                                 break;
                         default:
                                 throw new Exception('Type is currently not supported');
-                                return;
                 }
 
                 $encMethod = $this->encdoc->documentElement->appendChild($this->encdoc->createElementNS(XMLSecEnc::XMLENCNS, 'xenc:EncryptionMethod'));
@@ -78,7 +77,7 @@ class XMLSecEnc {
 
                 if ($replace) {
                         switch ($this->type) {
-                                case (XMLSecEnc::Element):
+                                case (XMLSecEnc::ELEMENT):
                                         if ($this->rawNode->nodeType == XML_DOCUMENT_NODE) {
                                                 return $this->encdoc;
                                         }
@@ -86,7 +85,7 @@ class XMLSecEnc {
                                         $this->rawNode->parentNode->replaceChild($importEnc, $this->rawNode);
                                         return $importEnc;
                                         break;
-                                case (XMLSecEnc::Content):
+                                case (XMLSecEnc::CONTENT):
                                         $importEnc = $this->rawNode->ownerDocument->importNode($this->encdoc->documentElement, TRUE);
                                         while ($this->rawNode->firstChild) {
                                                 $this->rawNode->removeChild($this->rawNode->firstChild);
@@ -117,7 +116,7 @@ class XMLSecEnc {
                         $decrypted = $objKey->decryptData($encryptedData);
                         if ($replace) {
                                 switch ($this->type) {
-                                        case (XMLSecEnc::Element):
+                                        case (XMLSecEnc::ELEMENT):
                                                 $newdoc = new DOMDocument();
                                                 $newdoc->loadXML($decrypted);
                                                 if ($this->rawNode->nodeType == XML_DOCUMENT_NODE) {
@@ -127,7 +126,7 @@ class XMLSecEnc {
                                                 $this->rawNode->parentNode->replaceChild($importEnc, $this->rawNode);
                                                 return $importEnc;
                                                 break;
-                                        case (XMLSecEnc::Content):
+                                        case (XMLSecEnc::CONTENT):
                                                 if ($this->rawNode->nodeType == XML_DOCUMENT_NODE) {
                                                         $doc = $this->rawNode;
                                                 } else {

@@ -22,7 +22,7 @@ class XMLSecurityDSig {
         const C14N_COMMENTS = 'http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments';
         const EXC_C14N = 'http://www.w3.org/2001/10/xml-exc-c14n#';
         const EXC_C14N_COMMENTS = 'http://www.w3.org/2001/10/xml-exc-c14n#WithComments';
-        const template = '<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        const TEMPLATE = '<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
                             <ds:SignedInfo>
                               <ds:SignatureMethod />
                             </ds:SignedInfo>
@@ -39,7 +39,7 @@ class XMLSecurityDSig {
 
         public function __construct() {
                 $sigdoc = new DOMDocument();
-                $sigdoc->loadXML(XMLSecurityDSig::template);
+                $sigdoc->loadXML(XMLSecurityDSig::TEMPLATE);
                 $this->sigNode = $sigdoc->documentElement;
         }
 
@@ -52,7 +52,7 @@ class XMLSecurityDSig {
                 return $this->xPathCtx;
         }
 
-        static function generate_GUID($prefix = NULL) {
+        static function generateGUID($prefix = NULL) {
                 $uuid = md5(uniqid(rand(), true));
                 $guid = $prefix . substr($uuid, 0, 8) . "-" .
                     substr($uuid, 8, 4) . "-" .
@@ -137,7 +137,7 @@ class XMLSecurityDSig {
                 /* Support PHP versions < 5.2 not containing C14N methods in DOM extension */
                 $php_version = explode('.', PHP_VERSION);
                 if (($php_version[0] < 5) || ($php_version[0] == 5 && $php_version[1] < 2)) {
-                        return $this->C14NGeneral($node, $exclusive, $withComments);
+                        return $this->c14NGeneral($node, $exclusive, $withComments);
                 }
                 return $node->C14N($exclusive, $withComments);
         }
@@ -286,7 +286,7 @@ class XMLSecurityDSig {
                         $uri = NULL;
                 } else {
                         /* Do wer really need to set a prefix? */
-                        $uri = XMLSecurityDSig::generate_GUID();
+                        $uri = XMLSecurityDSig::generateGUID();
                         $refNode->setAttribute("URI", '#' . $uri);
                 }
 
@@ -581,7 +581,7 @@ class XMLSecurityDSig {
           $withcomments - boolean indicating wether or not to include comments in canonicalized form
          */
 
-        public function C14NGeneral($element, $exclusive = FALSE, $withcomments = FALSE) {
+        public function c14NGeneral($element, $exclusive = FALSE, $withcomments = FALSE) {
                 /* IF PHP 5.2+ then use built in canonical functionality */
                 $php_version = explode('.', PHP_VERSION);
                 if (($php_version[0] > 5) || ($php_version[0] == 5 && $php_version[1] >= 2)) {
