@@ -2,6 +2,7 @@
 
 namespace druid628\exactTarget;
 
+use \SoapFault;
 use druid628\exactTarget\EtBaseClass;
 use druid628\exactTarget\EtSoapClient;
 use druid628\exactTarget\EtSimpleOperators;

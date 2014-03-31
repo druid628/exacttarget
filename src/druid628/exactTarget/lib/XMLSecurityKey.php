@@ -2,6 +2,8 @@
 
 namespace druid628\exactTarget\lib;
 
+use \Exception;
+
 /**
  * Class provided by Exact Target 
  */

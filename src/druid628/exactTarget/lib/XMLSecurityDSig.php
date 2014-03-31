@@ -2,6 +2,12 @@
 
 namespace druid628\exactTarget\lib;
 
+use \DOMElement;
+use \DOMDocument;
+use \DOMXPath;
+use \DOMNode;
+use \Exception;
+
 /**
  * Class provided by Exact Target 
  */

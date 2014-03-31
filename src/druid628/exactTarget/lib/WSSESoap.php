@@ -2,6 +2,7 @@
 namespace druid628\exactTarget\lib;
 
 use \DOMElement;
+use \DOMXPath;
 use \Exception;
 use druid628\exactTarget\lib\XMLSecEnc;
 use druid628\exactTarget\lib\XMLSecurityDSig;
