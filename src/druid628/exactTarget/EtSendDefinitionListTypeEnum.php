@@ -6,8 +6,8 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtSendDefinitionListTypeEnum extends EtBaseClass
 {
-    const SourceList      = 'SourceList';
-    const ExclusionList   = 'ExclusionList';
-    const DomainExclusion = 'DomainExclusion';
+    const SOURCELIST      = 'SourceList';
+    const EXCLUSIONLIST   = 'ExclusionList';
+    const DOMAINEXCLUSION = 'DomainExclusion';
 }
 

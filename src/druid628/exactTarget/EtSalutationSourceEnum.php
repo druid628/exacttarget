@@ -6,8 +6,8 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtSalutationSourceEnum extends EtBaseClass
 {
-    const _Default       = 'Default';
-    const ContentLibrary = 'ContentLibrary';
-    const None           = 'None';
+    const _DEFAULT       = 'Default';
+    const CONTENTLIBRARY = 'ContentLibrary';
+    const NONE           = 'None';
 }
 

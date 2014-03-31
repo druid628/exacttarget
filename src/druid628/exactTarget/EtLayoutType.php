@@ -6,8 +6,8 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtLayoutType extends EtBaseClass
 {
-    const HTMLWrapped = 'HTMLWrapped';
-    const RawText     = 'RawText';
+    const HTMLWRAPPED = 'HTMLWrapped';
+    const RAWTEXT     = 'RawText';
     const SMS         = 'SMS';
 }
 

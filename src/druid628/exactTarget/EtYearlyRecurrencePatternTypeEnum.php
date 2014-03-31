@@ -6,8 +6,8 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtYearlyRecurrencePatternTypeEnum extends EtBaseClass
 {
-    const ByDay   = 'ByDay';
-    const ByWeek  = 'ByWeek';
-    const ByMonth = 'ByMonth';
+    const BYDAY   = 'ByDay';
+    const BYWEEK  = 'ByWeek';
+    const BYMONTH = 'ByMonth';
 }
 

@@ -6,12 +6,12 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtRecurrenceTypeEnum extends EtBaseClass
 {
-    const Secondly = 'Secondly';
-    const Minutely = 'Minutely';
-    const Hourly   = 'Hourly';
-    const Daily    = 'Daily';
-    const Weekly   = 'Weekly';
-    const Monthly  = 'Monthly';
-    const Yearly   = 'Yearly';
+    const SECONDLY = 'Secondly';
+    const MINUTELY = 'Minutely';
+    const HOURLY   = 'Hourly';
+    const DAILY    = 'Daily';
+    const WEEKLY   = 'Weekly';
+    const MONTHLY  = 'Monthly';
+    const YEARLY   = 'Yearly';
 }
 

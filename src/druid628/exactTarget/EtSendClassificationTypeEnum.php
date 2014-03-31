@@ -6,7 +6,7 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtSendClassificationTypeEnum extends EtBaseClass
 {
-    const Operational = 'Operational';
-    const Marketing   = 'Marketing';
+    const OPERATIONAL = 'Operational';
+    const MARKETING   = 'Marketing';
 }
 

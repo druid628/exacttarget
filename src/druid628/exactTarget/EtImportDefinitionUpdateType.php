@@ -6,10 +6,10 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtImportDefinitionUpdateType extends EtBaseClass
 {
-    const AddAndUpdate      = 'AddAndUpdate';
-    const AddAndDoNotUpdate = 'AddAndDoNotUpdate';
-    const UpdateButDoNotAdd = 'UpdateButDoNotAdd';
-    const Merge             = 'Merge';
-    const Overwrite         = 'Overwrite';
+    const ADDANDUPDATE      = 'AddAndUpdate';
+    const ADDANDDONOTUPDATE = 'AddAndDoNotUpdate';
+    const UPDATEBUTDONOTADD = 'UpdateButDoNotAdd';
+    const MERGE             = 'Merge';
+    const OVERWRITE         = 'Overwrite';
 }
 

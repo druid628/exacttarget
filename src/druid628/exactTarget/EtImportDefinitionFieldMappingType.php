@@ -7,7 +7,7 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtImportDefinitionFieldMappingType extends EtBaseClass
 {
-    const InferFromColumnHeadings = 'InferFromColumnHeadings';
-    const MapByOrdinal            = 'MapByOrdinal';
-    const ManualMap               = 'ManualMap';
+    const INFERFROMCOLUMNHEADINGS = 'InferFromColumnHeadings';
+    const MAPBYORDINAL            = 'MapByOrdinal';
+    const MANUALMAP               = 'ManualMap';
 }

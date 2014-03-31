@@ -6,9 +6,9 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtWeekOfMonthEnum extends EtBaseClass
 {
-    const first  = 'first';
-    const second = 'second';
-    const third  = 'third';
-    const fourth = 'fourth';
-    const last   = 'last';
+    const FIRST  = 'first';
+    const SECOND = 'second';
+    const THIRD  = 'third';
+    const FOURTH = 'fourth';
+    const LAST   = 'last';
 }

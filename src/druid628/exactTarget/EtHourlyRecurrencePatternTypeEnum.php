@@ -6,6 +6,6 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtHourlyRecurrencePatternTypeEnum extends EtBaseClass
 {
-    const Interval = 'Interval';
+    const INTERVAL = 'Interval';
 }
 

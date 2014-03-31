@@ -8,6 +8,6 @@ class EtFileType extends EtBaseClass
 {
     const CSV   = 'CSV';
     const TAB   = 'TAB';
-    const Other = 'Other';
+    const OTHER = 'Other';
 }
 

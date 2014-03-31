@@ -6,7 +6,7 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtRequestType extends EtBaseClass
 {
-    const Synchronous  = 'Synchronous';
-    const Asynchronous = 'Asynchronous';
+    const SYNCHRONOUS  = 'Synchronous';
+    const ASYNCHRONOUS = 'Asynchronous';
 }
 

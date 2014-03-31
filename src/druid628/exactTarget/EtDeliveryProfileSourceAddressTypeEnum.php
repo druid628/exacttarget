@@ -6,7 +6,7 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtDeliveryProfileSourceAddressTypeEnum extends EtBaseClass
 {
-    const DefaultPrivateIPAddress = 'DefaultPrivateIPAddress';
-    const CustomPrivateIPAddress  = 'CustomPrivateIPAddress';
+    const DEFAULTPRIVATEIPADDRESS = 'DefaultPrivateIPAddress';
+    const CUSTOMPRIVATEIPADDRESS  = 'CustomPrivateIPAddress';
 }
 

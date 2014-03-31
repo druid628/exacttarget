@@ -6,9 +6,9 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtExtractParameterDataType extends EtBaseClass
 {
-    const datetime = 'datetime';
-    const bool     = 'bool';
-    const string   = 'string';
-    const integer  = 'integer';
+    const DATETIME = 'datetime';
+    const BOOL     = 'bool';
+    const STRING   = 'string';
+    const INTEGER  = 'integer';
 }
 

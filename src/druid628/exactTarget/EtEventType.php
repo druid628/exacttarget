@@ -6,16 +6,16 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtEventType extends EtBaseClass
 {
-    const Open                = 'Open';
-    const Click               = 'Click';
-    const HardBounce          = 'HardBounce';
-    const SoftBounce          = 'SoftBounce';
-    const OtherBounce         = 'OtherBounce';
-    const Unsubscribe         = 'Unsubscribe';
-    const Sent                = 'Sent';
-    const NotSent             = 'NotSent';
-    const Survey              = 'Survey';
-    const ForwardedEmail      = 'ForwardedEmail';
-    const ForwardedEmailOptIn = 'ForwardedEmailOptIn';
+    const OPEN                = 'Open';
+    const CLICK               = 'Click';
+    const HARDBOUNCE          = 'HardBounce';
+    const SOFTBOUNCE          = 'SoftBounce';
+    const OTHERBOUNCE         = 'OtherBounce';
+    const UNSUBSCRIBE         = 'Unsubscribe';
+    const SENT                = 'Sent';
+    const NOTSENT             = 'NotSent';
+    const SURVEY              = 'Survey';
+    const FORWARDEDEMAIL      = 'ForwardedEmail';
+    const FORWARDEDEMAILOPTIN = 'ForwardedEmailOptIn';
 }
 

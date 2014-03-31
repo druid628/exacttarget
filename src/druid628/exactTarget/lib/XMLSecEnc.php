@@ -99,7 +99,6 @@ class XMLSecEnc {
         }
 
         public function decryptNode($objKey, $replace = TRUE) {
-                $data = '';
                 if (empty($this->rawNode)) {
                         throw new Exception('Node to decrypt has not been set');
                 }

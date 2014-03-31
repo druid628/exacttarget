@@ -6,11 +6,11 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtDataSourceTypeEnum extends EtBaseClass
 {
-    const _List              = 'List';
-    const CustomObject       = 'CustomObject';
-    const DomainExclusion    = 'DomainExclusion';
-    const SalesForceReport   = 'SalesForceReport';
-    const SalesForceCampaign = 'SalesForceCampaign';
-    const FilterDefinition   = 'FilterDefinition';
+    const _LIST              = 'List';
+    const CUSTOMOBJECT       = 'CustomObject';
+    const DOMAINEXCLUSION    = 'DomainExclusion';
+    const SALESFORCEREPORT   = 'SalesForceReport';
+    const SALESFORCECAMPAIGN = 'SalesForceCampaign';
+    const FILTERDEFINITION   = 'FilterDefinition';
 }
 

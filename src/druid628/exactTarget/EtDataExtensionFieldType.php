@@ -6,11 +6,11 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtDataExtensionFieldType extends EtBaseClass
 {
-    const Text         = 'Text';
-    const Number       = 'Number';
-    const Date         = 'Date';
-    const Boolean      = 'Boolean';
-    const EmailAddress = 'EmailAddress';
-    const Phone        = 'Phone';
+    const TEXT         = 'Text';
+    const NUMBER       = 'Number';
+    const DATE         = 'Date';
+    const BOOLEAN      = 'Boolean';
+    const EMAILADDRESS = 'EmailAddress';
+    const PHONE        = 'Phone';
 }
 

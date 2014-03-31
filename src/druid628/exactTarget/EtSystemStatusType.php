@@ -7,7 +7,7 @@ use druid628\exactTarget\EtBaseClass;
 class EtSystemStatusType extends EtBaseClass
 {
     const OK              = 'OK';
-    const UnplannedOutage = 'UnplannedOutage';
-    const InMaintenance   = 'InMaintenance';
+    const UNPLANNEDOUTAGE = 'UnplannedOutage';
+    const INMAINTENANCE   = 'InMaintenance';
 }
 

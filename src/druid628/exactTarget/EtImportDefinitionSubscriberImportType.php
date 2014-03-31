@@ -6,7 +6,7 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtImportDefinitionSubscriberImportType extends EtBaseClass
 {
-    const Email = 'Email';
+    const EMAIL = 'Email';
     const SMS   = 'SMS';
 }
 

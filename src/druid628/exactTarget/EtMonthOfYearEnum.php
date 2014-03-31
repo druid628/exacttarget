@@ -6,17 +6,17 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtMonthOfYearEnum extends EtBaseClass
 {
-    const January   = 'January';
-    const February  = 'February';
-    const March     = 'March';
-    const April     = 'April';
-    const May       = 'May';
-    const June      = 'June';
-    const July      = 'July';
-    const August    = 'August';
-    const September = 'September';
-    const October   = 'October';
-    const November  = 'November';
-    const December  = 'December';
+    const JANUARY   = 'January';
+    const FEBRUARY  = 'February';
+    const MARCH     = 'March';
+    const APRIL     = 'April';
+    const MAY       = 'May';
+    const JUNE      = 'June';
+    const JULY      = 'July';
+    const AUGUST    = 'August';
+    const SEPTEMBER = 'September';
+    const OCTOBER   = 'October';
+    const NOVEMBER  = 'November';
+    const DECEMBER  = 'December';
 }
 
