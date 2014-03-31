@@ -1,7 +1,8 @@
 <?php
 namespace druid628\exactTarget\lib;
 
-use \DOMXpath;
+use \DOMElement;
+use \Exception;
 use druid628\exactTarget\lib\XMLSecEnc;
 use druid628\exactTarget\lib\XMLSecurityDSig;
 use druid628\exactTarget\lib\XMLSecurityKey;

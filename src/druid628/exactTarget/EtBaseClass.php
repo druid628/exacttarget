@@ -2,6 +2,8 @@
 
 namespace druid628\exactTarget;
 
+use druid628\exactTarget\Exception\EtMethodNotFoundException;
+
 /**
  * EtBaseClass
  *
