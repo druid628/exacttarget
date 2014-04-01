@@ -7,7 +7,8 @@ ExactTargetComponent
 ![Project status](http://stillmaintained.com/druid628/exacttarget.png)
 [![Build Status](https://travis-ci.org/druid628/exacttarget.png?branch=master)](https://travis-ci.org/druid628/exacttarget) 
 [![Coverage Status](https://coveralls.io/repos/druid628/exacttarget/badge.png)](https://coveralls.io/r/druid628/exacttarget) 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c1e05860-505e-4152-a8f7-98ffac826de6/mini.png)](https://insight.sensiolabs.com/projects/c1e05860-505e-4152-a8f7-98ffac826de6)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c1e05860-505e-4152-a8f7-98ffac826de6/mini.png)](https://insight.sensiolabs.com/projects/c1e05860-505e-4152-a8f7-98ffac826de6)  
+[![Latest Stable Version](https://poser.pugx.org/druid628/exacttarget/v/stable.png)](https://packagist.org/packages/druid628/exacttarget) [![Total Downloads](https://poser.pugx.org/druid628/exacttarget/downloads.png)](https://packagist.org/packages/druid628/exacttarget) [![Latest Unstable Version](https://poser.pugx.org/druid628/exacttarget/v/unstable.png)](https://packagist.org/packages/druid628/exacttarget) [![License](https://poser.pugx.org/druid628/exacttarget/license.png)](https://packagist.org/packages/druid628/exacttarget)
 
 General  
 ----------
