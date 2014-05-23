@@ -196,9 +196,9 @@ class EtClient extends EtBaseClass
      *
      * @return mixed | Object if successful boolean false if unsuccessful
      */
-    public function recall($class, $filter = NULL, $properties = NULL)
+    public function recall($class, $filter = NULL, $properties = NULL, $classNameOverride = NULL)
     {
-        $className = substr($class, 2);
+        $className = $classNameOverride ?: substr($class, 2);
 
         $request = new EtRecallRequest();
         $request->ObjectType = $className;
@@ -207,7 +207,7 @@ class EtClient extends EtBaseClass
         } else {
             $request->Properties = $this->getDefinitionOfObject($className);
         }
-        $request->Filter = self::soapCall($filter)
+        $request->Filter = self::soapCall($filter);
 
         $requestMsg                  = new EtRecallRequestMsg();
         $requestMsg->RetrieveRequest = $request;
