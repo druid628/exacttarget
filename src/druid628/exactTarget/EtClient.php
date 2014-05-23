@@ -228,10 +228,17 @@ class EtClient extends EtBaseClass
         $results                     = $this->client->Retrieve($requestMsg);
         $nsClass                     = __NAMESPACE__ . "\\" . $class;
         if (isset($results->Results)) {
-            $recalledClass = $this->cast($results->Results, new $nsClass($this), $this);
-
-            return $recalledClass;
-        }
+            if (is_array($results->Results)) {
+                $recalledClasses = array();
+                foreach ($results->Results as $result) {
+                    $recalledClasses[] = $this->cast($result, new $nsClass($this), $this);
+                }
+                return $recalledClasses;
+            } else {
+                $recalledClass = $this->cast($results->Results, new $nsClass($this), $this);
+                return $recalledClass;
+            }
+	}
 
         return false;
     }
@@ -242,7 +249,7 @@ class EtClient extends EtBaseClass
      *
      * @return array
      */
-    function getDefinitionOfObject($objectType)
+    public function getDefinitionOfObject($objectType)
     {
         $lstProps = array();
         try {

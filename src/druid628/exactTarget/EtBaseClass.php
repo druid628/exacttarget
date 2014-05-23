@@ -93,7 +93,25 @@ abstract class EtBaseClass
         }
 
         // lets instantiate the new object
-        $tmpObject = $reflectionClass->newInstance($client);
+        $tmpObject = null;
+        try
+        {
+                $r = new \ReflectionMethod($class, '__construct');
+                $params = $r->getParameters();
+                if (count($params))
+                {
+                        $tmpObject = $reflectionClass->newInstance($client);
+                }
+        }
+        catch(\ReflectionException $e)
+        {
+                // do nothing
+        }
+
+        if ($tmpObject === null)
+        {
+                $tmpObject = $reflectionClass->newInstance();
+        }
 
         $properties = Array();
         foreach ($reflectionClass->getProperties() as $property) {
