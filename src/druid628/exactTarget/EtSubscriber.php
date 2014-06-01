@@ -4,6 +4,10 @@ namespace druid628\exactTarget;
 
 use druid628\exactTarget\EtBaseClass;
 use druid628\exactTarget\EtSubscriberList;
+use druid628\exactTarget\EtSimpleFilterPart;
+use druid628\exactTarget\EtSimpleOperators;
+use druid628\exactTarget\EtComplexFilterPart;
+use druid628\exactTarget\EtLogicalOperators;
 
 /**
  * EtSubscriber (Active Class)
@@ -91,32 +95,32 @@ class EtSubscriber extends EtBaseClass
      *             'Value'    => $subscriberKey,
      *         ),
      */
-    public function find($subscriberKey, $emailAddress = null, $options = array())
+    public function find($subscriberKey, $emailAddress = null)
     {
-        $subscriberInfo = array(
-            array(
-                'Name'     => 'SubscriberKey',
-                'operator' => 'equals',
-                'Value'    => $subscriberKey,
-            ),
-        );
+        $subscriberFilter = new EtSimpleFilterPart();
+        $subscriberFilter->Property = "SubscriberKey";
+        $subscriberFilter->SimpleOperator = EtSimpleOperators::EQUALS;
+        $subscriberFilter->Value = array($subscriberKey);
+        $filter = $subscriberFilter;
 
-        if (!is_null($emailAddress)) {
-            $subscriberInfo[] = array(
-                'Name'     => 'EmailAddress',
-                'operator' => 'equals',
-                'Value'    => $emailAddress,
-            );
-        }
-        if (!empty($options)) {
-            $subscriberInfo = array_merge($subscriberInfo, $options);
+        if ( ! is_null($emailAddress)) {
+
+            $emailFilter = new EtSimpleFilterPart();
+            $emailFilter->Property = "EmailAddress";
+            $emailFilter->SimpleOperator = EtSimpleOperators::EQUALS;
+            $emailFilter->Value = array($emailAddress);
+
+            $filter = new EtComplexFilterPart();
+            $filter->LeftOperand = $subscriberFilter;
+            $filter->LogicalOperator = EtLogicalOperators::_AND;
+            $filter->RightOperand = $emailFilter;
         }
 
-        if ($newSub = $this->client->recallSubscriber($subscriberInfo)) {
+        if ($newSub = $this->client->recallSubscriber($filter)) {
             $this->reAssign($newSub);
             $this->setNotNew();
         } else {
-            $this->populateNew($subscriberInfo);
+            $this->populateNew($subscriberKey, $emailAddress);
         }
     }
 
@@ -126,13 +130,12 @@ class EtSubscriber extends EtBaseClass
      *
      * @param array $subscriberInfo
      */
-    protected function populateNew($subscriberInfo)
+    protected function populateNew($subscriberKey, $emailAddress = NULL)
     {
-        foreach ($subscriberInfo as $info) {
-            if (strtolower($info['operator']) == "equals") {
-                $this->set($info['Name'], $info['Value']);
-            }
-        }
+        $this->set('SubscriberKey', $subscriberKey);
+        if ( ! is_null($emailAddress)) {
+            $this->set('EmailAddress', $emailAddress);
+	}
     }
 
     /**
