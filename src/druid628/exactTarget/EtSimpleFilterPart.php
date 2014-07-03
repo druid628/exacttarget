@@ -2,8 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
-
 class EtSimpleFilterPart extends EtFilterPart
 {
     public $Property; // String

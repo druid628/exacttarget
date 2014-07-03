@@ -10,6 +10,9 @@ use druid628\exactTarget\lib\XMLSecurityKey;
 
 /**
  * Class provided by Exact Target 
+ *
+ * @codeCoverageIgnore 
+ * Class is a third-party library thus ignored 
  */
 class WSSESoap {
 	const WSSENS  = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
