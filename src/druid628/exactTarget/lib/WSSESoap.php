@@ -9,7 +9,10 @@ use druid628\exactTarget\lib\XMLSecurityDSig;
 use druid628\exactTarget\lib\XMLSecurityKey;
 
 /**
- * Class provided by Exact Target
+ * Class provided by Exact Target 
+ *
+ * @codeCoverageIgnore 
+ * Class is a third-party library thus ignored 
  */
 class WSSESoap
 {

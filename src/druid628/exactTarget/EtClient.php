@@ -192,46 +192,40 @@ class EtClient extends EtBaseClass
      * Generic get/retrieve (recall - I needed a 6 letter word for get) function to call ET-Retrieve Request
      *
      * @param       Et[mixed] $class
-     * @param array $properties
+     * @param       EtFilterPart $filter (can be a EtSimpleFilterPart, EtComplexFilterPart, or EtTagFilterPart).
      *
      * @return mixed | Object if successful boolean false if unsuccessful
-     *
-     * $properties array(
-     *              [0] =>
-     *                  array(
-     *                      ['name']        => Property Name,
-     *                      ['value']       => Value to Filter on,
-     *                      ['operator']    => see self::OperatorConstants,
-     *                  ), ...
-     *     )
      */
-    public function recall($class, $properties)
+    public function recall($class, $filter = NULL, $properties = NULL, $classNameOverride = NULL)
     {
-        $className = substr($class, 2);
+        $className = $classNameOverride ?: substr($class, 2);
 
-        $request             = new EtRecallRequest();
+        $request = new EtRecallRequest();
         $request->ObjectType = $className;
-
-        $request->Properties = $this->getDefinitionOfObject($className);
-
-        $filter = new EtSimpleFilterPart();
-        foreach ($properties as $prop) {
-            $filter->Property       = $prop['Name'];
-            $filter->Value          = $prop['Value'];
-            $filter->SimpleOperator = constant(__NAMESPACE__ . "\EtSimpleOperators::" . strtoupper($prop['operator']));
+        if ($properties != NULL) {
+            $request->Properties = $properties;
+        } else {
+            $request->Properties = $this->getDefinitionOfObject($className);
         }
-
-        $request->Filter = new \SoapVar($filter, SOAP_ENC_OBJECT, "SimpleFilterPart", self::SOAPWSDL);
+        $request->Filter = self::soapCall($filter);
 
         $requestMsg                  = new EtRecallRequestMsg();
         $requestMsg->RetrieveRequest = $request;
         $results                     = $this->client->Retrieve($requestMsg);
         $nsClass                     = __NAMESPACE__ . "\\" . $class;
-        if (isset($results->Results)) {
-            $recalledClass = $this->cast($results->Results, new $nsClass($this), $this);
 
-            return $recalledClass;
-        }
+        if (isset($results->Results)) {
+            if (is_array($results->Results)) {
+                $recalledClasses = array();
+                foreach ($results->Results as $result) {
+                    $recalledClasses[] = $this->cast($result, new $nsClass($this), $this);
+                }
+                return $recalledClasses;
+            } else {
+                $recalledClass = $this->cast($results->Results, new $nsClass($this), $this);
+                return $recalledClass;
+            }
+	}
 
         return false;
     }
@@ -242,7 +236,7 @@ class EtClient extends EtBaseClass
      *
      * @return array
      */
-    function getDefinitionOfObject($objectType)
+    public function getDefinitionOfObject($objectType)
     {
         $lstProps = array();
         try {
@@ -254,6 +248,7 @@ class EtClient extends EtBaseClass
 
             /* Call the Retrieve method passing the instantiated ExactTarget_RetrieveRequestMsg object */
             $status  = $this->client->Describe($defRqstMsg);
+
             $results = $status->ObjectDefinition;
 
             if (count($results->Properties) > 0) {

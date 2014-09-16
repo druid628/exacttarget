@@ -9,6 +9,9 @@ use \DOMNode;
 
 /**
  * Class provided by Exact Target 
+ *
+ * @codeCoverageIgnore 
+ * Class is a third-party library thus ignored 
  */
 class XMLSecEnc {
 
