@@ -6,14 +6,55 @@ use druid628\exactTarget\EtBaseClass;
 
 class EtAPIObject extends EtBaseClass
 {
-    public $Client; // EtClientID
-    public $PartnerKey; // String
-    public $PartnerProperties; // EtAPIProperty
-    public $CreatedDate; // dateTime
-    public $ModifiedDate; // dateTime
-    public $ID; // int
-    public $ObjectID; // String
-    public $CustomerKey; // String
-    public $Owner; // EtOwner
-    public $CorrelationID; // String
+
+    /**
+     * @param EtClientID $Client
+     */
+    public $Client; 
+
+    /**
+     * @param string $PartnerKey
+     */
+    public $PartnerKey; 
+
+    /**
+     * @param EtAPIProperty $PartnerProperties
+     */
+    public $PartnerProperties; 
+
+    /**
+     * @param DateTime $CreatedDate;
+     */
+    public $CreatedDate; 
+
+    /**
+     * @param DateTime $ModifiedDate
+     */
+    public $ModifiedDate; 
+
+    /**
+     * @param int $ID
+     */
+    public $ID; 
+
+    /**
+     * @param string $ObjectID
+     */
+    public $ObjectID; 
+
+    /**
+     * @param string $CustomerKey
+     */
+    public $CustomerKey; 
+
+    /**
+     * @param EtOwner $Owner
+     */
+    public $Owner; 
+
+    /**
+     * @param string $CorrelationID
+     */
+    public $CorrelationID;
+
 }
