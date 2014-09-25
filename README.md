@@ -4,6 +4,7 @@ ExactTargetComponent
 **Package:** druid628\exactTarget  
 **Uses:** EtBaseClass.php  
 **Version:** 1.0  
+![author](http://img.shields.io/badge/author-druid628-blue.svg)  
 ![Project status](http://stillmaintained.com/druid628/exacttarget.png)
 [![Build Status](https://travis-ci.org/druid628/exacttarget.png?branch=master)](https://travis-ci.org/druid628/exacttarget) 
 [![Coverage Status](https://coveralls.io/repos/druid628/exacttarget/badge.png)](https://coveralls.io/r/druid628/exacttarget) 
