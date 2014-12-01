@@ -19,6 +19,8 @@ class EtTriggeredSend extends EtBaseClass
 {
 
     protected $client;
+
+    public $Client; // EtClientID
     public $TriggeredSendDefinition; // EtTriggeredSendDefinition
     public $Subscribers; // EtSubscriber
     public $Attributes; // EtAttribute
