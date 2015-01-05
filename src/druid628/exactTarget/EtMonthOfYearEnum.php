@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtMonthOfYearEnum extends EtBaseClass
 {
@@ -19,4 +18,3 @@ class EtMonthOfYearEnum extends EtBaseClass
     const November  = 'November';
     const December  = 'December';
 }
-

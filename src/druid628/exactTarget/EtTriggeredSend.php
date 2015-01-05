@@ -2,8 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
-use druid628\exactTarget\EtClient;
 
 /**
  * EtTriggeredSend (Active Class)
@@ -17,7 +15,6 @@ use druid628\exactTarget\EtClient;
  */
 class EtTriggeredSend extends EtBaseClass
 {
-
     protected $client;
 
     public $Client; // EtClientID
@@ -108,5 +105,4 @@ class EtTriggeredSend extends EtBaseClass
     {
         return $this->client->sendEmail($this, "TriggeredSend");
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtPerformRequest extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtPerformRequest extends EtBaseClass
     public $Action; // String
     public $Definitions; // EtDefinitions
 }
-

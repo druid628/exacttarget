@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSystemStatusType extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtSystemStatusType extends EtBaseClass
     const UnplannedOutage = 'UnplannedOutage';
     const InMaintenance   = 'InMaintenance';
 }
-

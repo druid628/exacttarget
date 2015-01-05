@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtObjectDefinition extends EtBaseClass
 {
@@ -20,4 +19,3 @@ class EtObjectDefinition extends EtBaseClass
     public $ExtendedProperties; // EtExtendedProperties
     public $ChildObjects; // EtObjectDefinition
 }
-

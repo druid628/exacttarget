@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 /**
  * EtAttribute (Passive Class)
@@ -28,5 +27,4 @@ class EtAttribute extends EtBaseClass
             $this->Value = $value;
         }
     }
-
 }

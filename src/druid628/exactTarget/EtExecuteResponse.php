@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtExecuteResponse extends EtBaseClass
 {
@@ -12,4 +11,3 @@ class EtExecuteResponse extends EtBaseClass
     public $Results; // EtAPIProperty
     public $ErrorCode; // int
 }
-

@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtMessagingConfiguration extends EtBaseClass
 {
@@ -16,4 +15,3 @@ class EtMessagingConfiguration extends EtBaseClass
     public $CallbackUrl; // String
     public $MediaTypes; // String
 }
-

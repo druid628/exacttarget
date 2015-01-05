@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtUserAccess extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtUserAccess extends EtBaseClass
     public $Description; // String
     public $Delete; // int
 }
-

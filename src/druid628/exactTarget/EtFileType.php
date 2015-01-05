@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtFileType extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtFileType extends EtBaseClass
     const TAB   = 'TAB';
     const Other = 'Other';
 }
-

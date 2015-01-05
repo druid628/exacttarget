@@ -2,6 +2,6 @@
 
 namespace druid628\exactTarget\Exception;
 
-class EtClassNotFoundException extends \Exception
+class EtClassNotFound extends \Exception
 {
 }

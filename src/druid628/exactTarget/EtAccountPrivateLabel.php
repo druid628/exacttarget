@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtAccountPrivateLabel extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtAccountPrivateLabel extends EtBaseClass
     public $OwnerMemberID; // int
     public $ColorPaletteXML; // String
 }
-

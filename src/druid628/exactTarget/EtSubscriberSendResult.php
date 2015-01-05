@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSubscriberSendResult extends EtBaseClass
 {
@@ -22,4 +21,3 @@ class EtSubscriberSendResult extends EtBaseClass
     public $Subject; // String
     public $ViewSentEmailURL; // String
 }
-

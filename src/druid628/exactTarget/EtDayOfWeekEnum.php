@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtDayOfWeekEnum extends EtBaseClass
 {
@@ -14,4 +13,3 @@ class EtDayOfWeekEnum extends EtBaseClass
     const Friday    = 'Friday';
     const Saturday  = 'Saturday';
 }
-

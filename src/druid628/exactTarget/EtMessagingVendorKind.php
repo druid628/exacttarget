@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtMessagingVendorKind extends EtBaseClass
 {
@@ -12,4 +11,3 @@ class EtMessagingVendorKind extends EtBaseClass
     public $IsPasswordRequired; // boolean
     public $IsProfileRequired; // boolean
 }
-

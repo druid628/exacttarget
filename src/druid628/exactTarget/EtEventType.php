@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtEventType extends EtBaseClass
 {
@@ -18,4 +17,3 @@ class EtEventType extends EtBaseClass
     const ForwardedEmail      = 'ForwardedEmail';
     const ForwardedEmailOptIn = 'ForwardedEmailOptIn';
 }
-

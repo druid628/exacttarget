@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtQueryRequest extends EtBaseClass
 {
@@ -14,4 +13,3 @@ class EtQueryRequest extends EtBaseClass
     public $QueryAllAccounts; // boolean
     public $RetrieveAllSinceLastBatch; // boolean
 }
-

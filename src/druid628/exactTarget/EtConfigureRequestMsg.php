@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtConfigureRequestMsg extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtConfigureRequestMsg extends EtBaseClass
     public $Action; // String
     public $Configurations; // EtConfigurations
 }
-

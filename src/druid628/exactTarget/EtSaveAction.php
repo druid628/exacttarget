@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSaveAction extends EtBaseClass
 {
@@ -12,4 +11,3 @@ class EtSaveAction extends EtBaseClass
     const UPDATEADD  = 'UpdateAdd';
     const UPDATEONLY = 'UpdateOnly';
 }
-

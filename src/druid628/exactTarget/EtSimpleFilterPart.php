@@ -9,4 +9,3 @@ class EtSimpleFilterPart extends EtFilterPart
     public $Value; // String
     public $DateValue; // dateTime
 }
-

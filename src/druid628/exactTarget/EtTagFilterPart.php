@@ -6,4 +6,3 @@ class EtTagFilterPart extends EtFilterPart
 {
     public $Tags; // EtTags
 }
-

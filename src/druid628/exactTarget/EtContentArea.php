@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtContentArea extends EtBaseClass
 {
@@ -15,4 +14,3 @@ class EtContentArea extends EtBaseClass
     public $IsDynamicContent; // boolean
     public $IsSurvey; // boolean
 }
-

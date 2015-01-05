@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtScheduleDefinition extends EtBaseClass
 {
@@ -16,4 +15,3 @@ class EtScheduleDefinition extends EtBaseClass
     public $Occurrences; // int
     public $Keyword; // String
 }
-

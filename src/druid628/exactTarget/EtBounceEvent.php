@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtBounceEvent extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtBounceEvent extends EtBaseClass
     public $SMTPReason; // String
     public $BounceType; // String
 }
-

@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSalutationSourceEnum extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtSalutationSourceEnum extends EtBaseClass
     const ContentLibrary = 'ContentLibrary';
     const None           = 'None';
 }
-

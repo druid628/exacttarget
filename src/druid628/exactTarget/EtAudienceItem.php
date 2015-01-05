@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtAudienceItem extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtAudienceItem extends EtBaseClass
     public $CustomObjectID; // String
     public $DataSourceTypeID; // EtDataSourceTypeEnum
 }
-

@@ -2,12 +2,7 @@
 
 namespace druid628\exactTarget;
 
-use \SoapFault;
-use druid628\exactTarget\EtBaseClass;
-use druid628\exactTarget\EtSoapClient;
-use druid628\exactTarget\EtSimpleOperators;
-use druid628\exactTarget\EtTriggeredSend;
-use druid628\exactTarget\EtTriggeredSendDefinition;
+use SoapFault;
 use druid628\exactTarget\Exception\EtSoapException;
 use druid628\exactTarget\Exception\EtClassNotFoundException;
 use druid628\exactTarget\Exception\EtMethodNotFoundException;
@@ -73,7 +68,7 @@ class EtClient extends EtBaseClass
             'ReasonUnsub',
             'CurrentStatus',
             'PreviousStatus',
-            'CreatedDate'
+            'CreatedDate',
         ),
     );
 
@@ -87,7 +82,6 @@ class EtClient extends EtBaseClass
      */
     public function __construct($username, $password, $serverInstance = '')
     {
-
         $this->setServer($serverInstance);
 
         $this->client           = new EtSoapClient($this->wsdl, array('trace' => 1));
@@ -104,8 +98,7 @@ class EtClient extends EtBaseClass
             $serverInstance .= ".";
         }
 
-
-        $this->wsdl = "https://webservice." . $serverInstance . "exacttarget.com/etframework.wsdl";
+        $this->wsdl = "https://webservice.".$serverInstance."exacttarget.com/etframework.wsdl";
     }
 
     /**
@@ -132,7 +125,6 @@ class EtClient extends EtBaseClass
      */
     public function __call($method, $arguments)
     {
-
         $verb = substr($method, 0, 6);
         if (in_array($verb, array('create', 'recall', 'update', 'bundle'))) {
             $className = substr($method, 6);
@@ -142,7 +134,7 @@ class EtClient extends EtBaseClass
 
         if (method_exists($this, $verb)) {
             $className = sprintf("Et%s", $className);
-            if (class_exists(sprintf(__NAMESPACE__ . "\%s", $className))) {
+            if (class_exists(sprintf(__NAMESPACE__."\%s", $className))) {
                 return call_user_func_array(array($this, $verb), array_merge(array($className), $arguments));
             }
 
@@ -165,7 +157,7 @@ class EtClient extends EtBaseClass
             return false;
         }
 
-        $nsClass           = __NAMESPACE__ . "\\" . $class;
+        $nsClass           = __NAMESPACE__."\\".$class;
         $sub               = new $nsClass();
         $propertiesOfClass = array_keys(get_object_vars($sub));
         foreach ($propertiesOfClass as $prop) {
@@ -191,18 +183,18 @@ class EtClient extends EtBaseClass
     /**
      * Generic get/retrieve (recall - I needed a 6 letter word for get) function to call ET-Retrieve Request
      *
-     * @param       Et[mixed] $class
-     * @param       EtFilterPart $filter (can be a EtSimpleFilterPart, EtComplexFilterPart, or EtTagFilterPart).
+     * @param Et[mixed]    $class
+     * @param EtFilterPart $filter (can be a EtSimpleFilterPart, EtComplexFilterPart, or EtTagFilterPart).
      *
      * @return mixed | Object if successful boolean false if unsuccessful
      */
-    public function recall($class, $filter = NULL, $properties = NULL, $classNameOverride = NULL)
+    public function recall($class, $filter = null, $properties = null, $classNameOverride = null)
     {
         $className = $classNameOverride ?: substr($class, 2);
 
         $request = new EtRecallRequest();
         $request->ObjectType = $className;
-        if ($properties != NULL) {
+        if ($properties != null) {
             $request->Properties = $properties;
         } else {
             $request->Properties = $this->getDefinitionOfObject($className);
@@ -212,7 +204,7 @@ class EtClient extends EtBaseClass
         $requestMsg                  = new EtRecallRequestMsg();
         $requestMsg->RetrieveRequest = $request;
         $results                     = $this->client->Retrieve($requestMsg);
-        $nsClass                     = __NAMESPACE__ . "\\" . $class;
+        $nsClass                     = __NAMESPACE__."\\".$class;
 
         if (isset($results->Results)) {
             if (is_array($results->Results)) {
@@ -220,12 +212,14 @@ class EtClient extends EtBaseClass
                 foreach ($results->Results as $result) {
                     $recalledClasses[] = $this->cast($result, new $nsClass($this), $this);
                 }
+
                 return $recalledClasses;
             } else {
                 $recalledClass = $this->cast($results->Results, new $nsClass($this), $this);
+
                 return $recalledClass;
             }
-	}
+        }
 
         return false;
     }
@@ -252,7 +246,6 @@ class EtClient extends EtBaseClass
             $results = $status->ObjectDefinition;
 
             if (count($results->Properties) > 0) {
-
                 $properties = $results->Properties;
                 foreach ($properties as $letter) {
                     if ($letter->IsRetrievable == true) {
@@ -270,20 +263,19 @@ class EtClient extends EtBaseClass
     /**
      * Generic Update function to call ET-Update Request
      *
-     * @param string $class
-     * @param  <T>object $activeClass
-     * @param string $updateType
+     * @param string    $class
+     * @param <T>object $activeClass
+     * @param string    $updateType
      *
      * @return <classOfT> $activeClass
      */
     public function update($class, $activeClass, $updateType = "UPDATEADD")
     {
-
-        $nsClass = __NAMESPACE__ . "\\" . $class;
+        $nsClass = __NAMESPACE__."\\".$class;
         if (!($activeClass instanceof $nsClass)) {
-            throw new \Exception(" UPDATE Failed! (Error Code: #DR4T) -   Update expect Class $class but was given " . get_class(
+            throw new \Exception(" UPDATE Failed! (Error Code: #DR4T) -   Update expect Class $class but was given ".get_class(
                 $activeClass
-            ) . ".  Update Cannot update given object");
+            ).".  Update Cannot update given object");
         }
         $className = substr($class, 2);
 
@@ -293,7 +285,7 @@ class EtClient extends EtBaseClass
         $requestOptions                = new EtCreateOptions();
         $saveOption                    = new EtSaveOption();
         $saveOption->PropertyName      = $className;
-        $saveOption->SaveAction        = constant("self::" . strtoupper($updateType));
+        $saveOption->SaveAction        = constant("self::".strtoupper($updateType));
         $requestOptions->SaveOptions[] = new \SoapVar($saveOption, SOAP_ENC_OBJECT, "SaveOption", self::SOAPWSDL);
         $request->Options              = new \SoapVar($requestOptions, SOAP_ENC_OBJECT, "CreateOptions", self::SOAPWSDL);
         $request->Objects              = array($object);
@@ -303,7 +295,6 @@ class EtClient extends EtBaseClass
         $updatedClass = $this->cast($results->Results->Object, new $nsClass($this), $this);
 
         return $updatedClass;
-
     }
 
     /**
@@ -324,14 +315,14 @@ class EtClient extends EtBaseClass
             throw new \Exception('Bundle Failed! Bundle expects an array to be passed');
         }
 
-        $nsClass   = __NAMESPACE__ . "\\" . $class;
+        $nsClass   = __NAMESPACE__."\\".$class;
         $className = substr($class, 2);
         $objects   = array_map(
             function ($activeClass) use ($nsClass, $class, $className) {
                 if (!($activeClass instanceof $nsClass)) {
-                    throw new \Exception("Bundle Failed! Bundle expects Class $class but was given " . get_class(
+                    throw new \Exception("Bundle Failed! Bundle expects Class $class but was given ".get_class(
                         $activeClass
-                    ) . ".");
+                    ).".");
                 }
 
                 return new \SoapVar($activeClass,
@@ -344,7 +335,7 @@ class EtClient extends EtBaseClass
 
         $saveOption                    = new \druid628\exactTarget\EtSaveOption();
         $saveOption->PropertyName      = $className;
-        $saveOption->SaveAction        = constant("self::" . strtoupper($updateType));
+        $saveOption->SaveAction        = constant("self::".strtoupper($updateType));
         $requestOptions                = new \druid628\exactTarget\EtCreateOptions();
         $requestOptions->SaveOptions[] = new \SoapVar($saveOption, SOAP_ENC_OBJECT, "SaveOption", self::SOAPWSDL);
         $request                       = new \druid628\exactTarget\EtCreateRequest();
@@ -461,7 +452,7 @@ class EtClient extends EtBaseClass
         }
 
         $event = new EtRecallRequest();
-        $event->setObjectType($eventType . 'Event');
+        $event->setObjectType($eventType.'Event');
         $event->setProperties($this->eventProperties[strtolower($eventType)]);
         $event_sfp                 = new EtSimpleFilterPart();
         $event_sfp->Value          = array($filter['value']);
@@ -476,7 +467,6 @@ class EtClient extends EtBaseClass
         if ($event_result->OverallStatus == 'OK') {
             return $event_result->Results;
         }
-
     }
 
     /**
@@ -488,7 +478,6 @@ class EtClient extends EtBaseClass
      */
     public function soapCall($object)
     {
-
         // Fix to avoid "Only variables can be passed by reference" error.
         $arr       = explode('\\', get_class($object));
         $classType = substr(end($arr), 2);

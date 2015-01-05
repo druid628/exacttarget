@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtLink extends EtBaseClass
 {
@@ -13,4 +12,3 @@ class EtLink extends EtBaseClass
     public $URL; // String
     public $Subscribers; // EtTrackingEvent
 }
-
