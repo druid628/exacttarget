@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtPriority extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtPriority extends EtBaseClass
     const Medium = 'Medium';
     const High   = 'High';
 }
-

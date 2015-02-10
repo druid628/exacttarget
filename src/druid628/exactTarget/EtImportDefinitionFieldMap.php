@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtImportDefinitionFieldMap extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtImportDefinitionFieldMap extends EtBaseClass
     public $SourceOrdinal; // int
     public $DestinationName; // String
 }
-

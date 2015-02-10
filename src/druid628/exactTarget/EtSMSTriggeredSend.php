@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSMSTriggeredSend extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtSMSTriggeredSend extends EtBaseClass
     public $Message; // String
     public $Number; // String
 }
-

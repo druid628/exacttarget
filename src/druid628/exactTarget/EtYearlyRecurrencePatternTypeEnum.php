@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtYearlyRecurrencePatternTypeEnum extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtYearlyRecurrencePatternTypeEnum extends EtBaseClass
     const ByWeek  = 'ByWeek';
     const ByMonth = 'ByMonth';
 }
-

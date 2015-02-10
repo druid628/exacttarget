@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSimpleOperators extends EtBaseClass
 {
@@ -18,5 +17,3 @@ class EtSimpleOperators extends EtBaseClass
     const IN                 = 'IN';
     const LIKE               = 'like';
 }
-
-

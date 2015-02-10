@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 /**
  * EtEmail (Active Class)
@@ -16,7 +15,6 @@ use druid628\exactTarget\EtBaseClass;
  */
 class EtEmail extends EtBaseClass
 {
-
     protected $client;
     public $Name; // String
     public $Folder; // String
@@ -84,5 +82,4 @@ class EtEmail extends EtBaseClass
     {
         return $this->client->sendEmail($this, "Email");
     }
-
 }

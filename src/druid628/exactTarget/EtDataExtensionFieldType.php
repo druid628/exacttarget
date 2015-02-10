@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtDataExtensionFieldType extends EtBaseClass
 {
@@ -13,4 +12,3 @@ class EtDataExtensionFieldType extends EtBaseClass
     const EmailAddress = 'EmailAddress';
     const Phone        = 'Phone';
 }
-

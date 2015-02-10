@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtRespondWhen extends EtBaseClass
 {
@@ -13,4 +12,3 @@ class EtRespondWhen extends EtBaseClass
     const OnConversationComplete = 'OnConversationComplete';
     const OnCallComplete         = 'OnCallComplete';
 }
-

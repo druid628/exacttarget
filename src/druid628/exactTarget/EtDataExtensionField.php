@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtPropertyDefinition;
 
 class EtDataExtensionField extends EtPropertyDefinition
 {
@@ -11,4 +10,3 @@ class EtDataExtensionField extends EtPropertyDefinition
     public $FieldType; // EtDataExtensionFieldType
     public $DataExtension; // EtDataExtension
 }
-

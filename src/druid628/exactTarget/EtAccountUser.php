@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtAccountUser extends EtBaseClass
 {
@@ -25,4 +24,3 @@ class EtAccountUser extends EtBaseClass
     public $BusinessUnit; // int
     public $DefaultBusinessUnit; // int
 }
-

@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtVersionInfoResponse extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtVersionInfoResponse extends EtBaseClass
     public $Notes; // String
     public $VersionHistory; // EtVersionInfoResponse
 }
-

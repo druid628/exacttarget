@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSendClassification extends EtBaseClass
 {
@@ -12,4 +11,3 @@ class EtSendClassification extends EtBaseClass
     public $SenderProfile; // EtSenderProfile
     public $DeliveryProfile; // EtDeliveryProfile
 }
-

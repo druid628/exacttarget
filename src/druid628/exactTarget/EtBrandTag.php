@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtBrandTag extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtBrandTag extends EtBaseClass
     public $Label; // String
     public $Data; // String
 }
-

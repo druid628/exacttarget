@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtAccountDataItem extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtAccountDataItem extends EtBaseClass
     public $PrivateLabelID; // int
     public $AccountType; // int
 }
-

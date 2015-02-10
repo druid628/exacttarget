@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtTriggeredSendStatusEnum extends EtBaseClass
 {
@@ -12,5 +11,3 @@ class EtTriggeredSendStatusEnum extends EtBaseClass
     const Canceled = 'Canceled';
     const Deleted  = 'Deleted';
 }
-
-

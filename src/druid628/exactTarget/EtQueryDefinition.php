@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtQueryDefinition extends EtBaseClass
 {
@@ -14,4 +13,3 @@ class EtQueryDefinition extends EtBaseClass
     public $FileType; // String
     public $Status; // String
 }
-

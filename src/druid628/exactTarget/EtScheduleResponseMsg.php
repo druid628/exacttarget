@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtScheduleResponseMsg extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtScheduleResponseMsg extends EtBaseClass
     public $OverallStatusMessage; // String
     public $RequestID; // String
 }
-

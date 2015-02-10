@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSendDefinitionStatusEnum extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtSendDefinitionStatusEnum extends EtBaseClass
     const Archived = 'Archived';
     const Deleted  = 'Deleted';
 }
-

@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtPortfolio extends EtBaseClass
 {
@@ -23,4 +22,3 @@ class EtPortfolio extends EtBaseClass
     public $CacheClearTime; // dateTime
     public $CategoryType; // String
 }
-

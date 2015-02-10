@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtImportResultsSummary extends EtBaseClass
 {
@@ -18,4 +17,3 @@ class EtImportResultsSummary extends EtBaseClass
     public $ImportStatus; // String
     public $TaskResultID; // int
 }
-

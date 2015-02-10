@@ -5,7 +5,6 @@ use druid628\exactTarget\EtSubscriber;
 
 class EtClientTest extends PHPUnit_Framework_TestCase
 {
-
     public function testServerConfig()
     {
         $client = new EtClient('test', 'test', 's4');
@@ -16,7 +15,6 @@ class EtClientTest extends PHPUnit_Framework_TestCase
         $client->setServer('s6');
 
         $this->assertEquals($client->getServer(), 's6');
-
     }
 
     public function testBuildTriggeredSend()
@@ -25,7 +23,6 @@ class EtClientTest extends PHPUnit_Framework_TestCase
         $ts     = $client->buildTriggeredSend('motherbrain');
 
         $this->assertEquals(get_class($ts), 'druid628\exactTarget\EtTriggeredSend');
-
     }
 
     public function testCastMethod()
@@ -38,8 +35,5 @@ class EtClientTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(get_class($subscriber), 'druid628\exactTarget\EtSubscriber');
         $this->assertEquals($subscriber->getEmailAddress(), 'druid628@gmail.com');
-
     }
-
 }
-

@@ -8,4 +8,3 @@ class EtComplexFilterPart extends EtFilterPart
     public $LogicalOperator; // EtLogicalOperators
     public $RightOperand; // EtFilterPart
 }
-

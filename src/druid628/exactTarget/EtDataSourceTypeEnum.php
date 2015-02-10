@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtDataSourceTypeEnum extends EtBaseClass
 {
@@ -13,4 +12,3 @@ class EtDataSourceTypeEnum extends EtBaseClass
     const SalesForceCampaign = 'SalesForceCampaign';
     const FilterDefinition   = 'FilterDefinition';
 }
-

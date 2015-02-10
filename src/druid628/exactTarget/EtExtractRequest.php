@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtExtractRequest extends EtBaseClass
 {
@@ -13,4 +12,3 @@ class EtExtractRequest extends EtBaseClass
     public $Description; // EtExtractDescription
     public $Definition; // EtExtractDefinition
 }
-

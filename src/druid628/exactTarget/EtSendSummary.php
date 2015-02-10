@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSendSummary extends EtBaseClass
 {
@@ -16,4 +15,3 @@ class EtSendSummary extends EtBaseClass
     public $Transactional; // int
     public $NonTransactional; // int
 }
-

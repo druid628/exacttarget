@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtAPIObject;
 
 class EtPropertyDefinition extends EtAPIObject
 {
@@ -42,4 +41,3 @@ class EtPropertyDefinition extends EtAPIObject
     public $Status; // String
     public $IsContextSpecific; // boolean
 }
-

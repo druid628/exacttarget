@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSubscriberResult extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtSubscriberResult extends EtBaseClass
     public $ErrorDescription; // String
     public $Ordinal; // int
 }
-

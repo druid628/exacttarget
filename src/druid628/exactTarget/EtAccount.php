@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtAccount extends EtBaseClass
 {
@@ -37,4 +36,3 @@ class EtAccount extends EtBaseClass
     public $AccountUsers; // EtAccountUser
     public $InheritAddress; // boolean
 }
-

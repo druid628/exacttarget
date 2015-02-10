@@ -17,7 +17,6 @@ use druid628\exactTarget\Exception\EtMethodNotFoundException;
  */
 abstract class EtBaseClass
 {
-
     /**
      * magic getter
      *
@@ -29,9 +28,8 @@ abstract class EtBaseClass
      */
     public function get($fieldName)
     {
-
         if (!property_exists($this, $fieldName)) {
-            throw new \Exception("Variable  ($fieldName) Not Found on " . get_class($this) . " object. ");
+            throw new \Exception("Variable  ($fieldName) Not Found on ".get_class($this)." object. ");
         }
 
         return $this->$fieldName;
@@ -65,16 +63,14 @@ abstract class EtBaseClass
             }
         }
 
-
-        throw new EtMethodNotFoundException("No Method ($method) exists on " . get_class($this));
-
+        throw new EtMethodNotFoundException("No Method ($method) exists on ".get_class($this));
     }
 
     /**
      * cast() - casts generic object to Et-Specific object
      *
-     * @param stdClass $obj   - standard php object
-     * @param string   $class - Et-class
+     * @param stdClass $obj    - standard php object
+     * @param string   $class  - Et-class
      * @param EtClient $client
      *
      * @return <typeOf $class>
@@ -82,10 +78,9 @@ abstract class EtBaseClass
      */
     public function cast($obj, $class, $client = null)
     {
-
         $reflectionClass = new \ReflectionClass($class);
         if (!$reflectionClass->IsInstantiable()) {
-            throw new \Exception($class . " is not instantiable!");
+            throw new \Exception($class." is not instantiable!");
         }
 
         if ($obj instanceof $class) {
@@ -94,26 +89,21 @@ abstract class EtBaseClass
 
         // lets instantiate the new object
         $tmpObject = null;
-        try
-        {
-                $r = new \ReflectionMethod($class, '__construct');
-                $params = $r->getParameters();
-                if (count($params))
-                {
-                        $tmpObject = $reflectionClass->newInstance($client);
-                }
-        }
-        catch(\ReflectionException $e)
-        {
-                // do nothing
+        try {
+            $r = new \ReflectionMethod($class, '__construct');
+            $params = $r->getParameters();
+            if (count($params)) {
+                $tmpObject = $reflectionClass->newInstance($client);
+            }
+        } catch (\ReflectionException $e) {
+            // do nothing
         }
 
-        if ($tmpObject === null)
-        {
-                $tmpObject = $reflectionClass->newInstance();
+        if ($tmpObject === null) {
+            $tmpObject = $reflectionClass->newInstance();
         }
 
-        $properties = Array();
+        $properties = array();
         foreach ($reflectionClass->getProperties() as $property) {
             $properties[$property->getName()] = $property;
         }
@@ -153,7 +143,6 @@ abstract class EtBaseClass
      */
     protected function reAssign($newClass)
     {
-
         if (get_class($newClass) !== get_class($this)) {
             return false;
         }
@@ -163,7 +152,6 @@ abstract class EtBaseClass
         foreach ($vars as $variable => $value) {
             $this->set($variable, $newClass->get($variable));
         }
-
     }
 
     /**
@@ -177,14 +165,12 @@ abstract class EtBaseClass
      */
     public function set($fieldName, $value)
     {
-
         if (!property_exists($this, $fieldName)) {
-            throw new \Exception("Variable  ($fieldName) Not Found on " . get_class($this) . " object. ");
+            throw new \Exception("Variable  ($fieldName) Not Found on ".get_class($this)." object. ");
         }
 
         $this->$fieldName = $value;
 
         return true;
     }
-
 }

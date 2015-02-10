@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 /**
  * EtList (Active Class)
@@ -16,7 +15,6 @@ use druid628\exactTarget\EtBaseClass;
  */
 class EtList extends EtBaseClass
 {
-
     protected $client;
     public $ListName; // String
     public $Category; // int
@@ -67,5 +65,4 @@ class EtList extends EtBaseClass
     {
         $this->client->updateList($this);
     }
-
 }

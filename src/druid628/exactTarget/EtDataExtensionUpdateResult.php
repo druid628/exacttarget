@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtDataExtensionUpdateResult extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtDataExtensionUpdateResult extends EtBaseClass
     public $KeyErrors; // EtKeyErrors
     public $ValueErrors; // EtValueErrors
 }
-

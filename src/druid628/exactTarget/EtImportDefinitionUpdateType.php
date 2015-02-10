@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtImportDefinitionUpdateType extends EtBaseClass
 {
@@ -12,4 +11,3 @@ class EtImportDefinitionUpdateType extends EtBaseClass
     const Merge             = 'Merge';
     const Overwrite         = 'Overwrite';
 }
-

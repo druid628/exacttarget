@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtEmailSendDefinition extends EtBaseClass
 {
@@ -25,4 +24,3 @@ class EtEmailSendDefinition extends EtBaseClass
     public $Additional; // String
     public $CCEmail; // String
 }
-

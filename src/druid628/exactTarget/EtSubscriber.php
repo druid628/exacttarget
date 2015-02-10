@@ -2,12 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
-use druid628\exactTarget\EtSubscriberList;
-use druid628\exactTarget\EtSimpleFilterPart;
-use druid628\exactTarget\EtSimpleOperators;
-use druid628\exactTarget\EtComplexFilterPart;
-use druid628\exactTarget\EtLogicalOperators;
 
 /**
  * EtSubscriber (Active Class)
@@ -21,7 +15,6 @@ use druid628\exactTarget\EtLogicalOperators;
  */
 class EtSubscriber extends EtBaseClass
 {
-
     const ACTIVE       = 'Active';
     const BOUNCED      = 'Bounced';
     const HELD         = 'Held';
@@ -88,12 +81,12 @@ class EtSubscriber extends EtBaseClass
      *
      * @param string $subscriberKey
      * @param string $emailAddress
-     * @param array  $options - Multidimensional array of other optional data about a subscriber should be in the following co
-     *                        array(
-     *             'Name'     => 'SubscriberKey',
-     *             'operator' => 'equals',
-     *             'Value'    => $subscriberKey,
-     *         ),
+     * @param array  $options       - Multidimensional array of other optional data about a subscriber should be in the following co
+     *                              array(
+     *                              'Name'     => 'SubscriberKey',
+     *                              'operator' => 'equals',
+     *                              'Value'    => $subscriberKey,
+     *                              ),
      */
     public function find($subscriberKey, $emailAddress = null)
     {
@@ -103,8 +96,7 @@ class EtSubscriber extends EtBaseClass
         $subscriberFilter->Value = array($subscriberKey);
         $filter = $subscriberFilter;
 
-        if ( ! is_null($emailAddress)) {
-
+        if (! is_null($emailAddress)) {
             $emailFilter = new EtSimpleFilterPart();
             $emailFilter->Property = "EmailAddress";
             $emailFilter->SimpleOperator = EtSimpleOperators::EQUALS;
@@ -130,12 +122,12 @@ class EtSubscriber extends EtBaseClass
      *
      * @param array $subscriberInfo
      */
-    protected function populateNew($subscriberKey, $emailAddress = NULL)
+    protected function populateNew($subscriberKey, $emailAddress = null)
     {
         $this->set('SubscriberKey', $subscriberKey);
-        if ( ! is_null($emailAddress)) {
+        if (! is_null($emailAddress)) {
             $this->set('EmailAddress', $emailAddress);
-	}
+        }
     }
 
     /**
@@ -167,9 +159,9 @@ class EtSubscriber extends EtBaseClass
     public function updateAttribute($EtAttribute)
     {
         if (!($EtAttribute instanceof \druid628\exactTarget\EtAttribute)) {
-            throw new \Exception(" updateAttribute expects an instance of \druid628\exactTarget\EtAttribute and was given " . get_class(
+            throw new \Exception(" updateAttribute expects an instance of \druid628\exactTarget\EtAttribute and was given ".get_class(
                 $EtAttribute
-            ) . ". ");
+            ).". ");
         }
         $nameToUpdate = $EtAttribute->getName();
         $attributes   = $this->getAttributes();
@@ -218,5 +210,4 @@ class EtSubscriber extends EtBaseClass
     {
         return $this->_new;
     }
-
 }

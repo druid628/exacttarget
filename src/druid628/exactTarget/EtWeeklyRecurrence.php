@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtWeeklyRecurrence extends EtBaseClass
 {
@@ -16,4 +15,3 @@ class EtWeeklyRecurrence extends EtBaseClass
     public $Friday; // boolean
     public $Saturday; // boolean
 }
-

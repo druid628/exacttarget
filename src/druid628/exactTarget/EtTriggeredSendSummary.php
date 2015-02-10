@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtTriggeredSendSummary extends EtBaseClass
 {
@@ -25,4 +24,3 @@ class EtTriggeredSendSummary extends EtBaseClass
     public $InProcess; // long
     public $NotSentDueToError; // long
 }
-

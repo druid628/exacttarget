@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSubscriberStatus extends EtBaseClass
 {
@@ -12,4 +11,3 @@ class EtSubscriberStatus extends EtBaseClass
     const Unsubscribed = 'Unsubscribed';
     const Deleted      = 'Deleted';
 }
-

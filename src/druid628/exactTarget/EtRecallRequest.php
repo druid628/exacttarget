@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtRecallRequest extends EtBaseClass
 {
@@ -19,4 +18,3 @@ class EtRecallRequest extends EtBaseClass
     public $Retrieves; // EtRetrieves
     public $Options; // EtRetrieveOptions
 }
-

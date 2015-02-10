@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtAccountTypeEnum extends EtBaseClass
 {
@@ -17,4 +16,3 @@ class EtAccountTypeEnum extends EtBaseClass
     const ENTERPRISE_2       = 'ENTERPRISE_2';
     const BUSINESS_UNIT      = 'BUSINESS_UNIT';
 }
-

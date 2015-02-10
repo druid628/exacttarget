@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSenderProfile extends EtBaseClass
 {
@@ -22,4 +21,3 @@ class EtSenderProfile extends EtBaseClass
     public $DataRetentionPeriodLength; // short
     public $DataRetentionPeriodUnitOfMeasure; // EtRecurrenceTypeEnum
 }
-
