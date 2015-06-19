@@ -54,7 +54,7 @@ class XMLSecEnc
         $xPath = new DOMXPath($this->encdoc);
         $objList = $xPath->query('/xenc:EncryptedData/xenc:CipherData/xenc:CipherValue');
         $cipherValue = $objList->item(0);
-        if ($cipherValue == null) {
+        if (is_null($cipherValue)) {
             throw new Exception('Error locating CipherValue element within template');
         }
         switch ($this->type) {

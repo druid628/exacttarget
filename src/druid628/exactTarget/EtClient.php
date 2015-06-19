@@ -194,7 +194,7 @@ class EtClient extends EtBaseClass
 
         $request = new EtRecallRequest();
         $request->ObjectType = $className;
-        if ($properties != null) {
+        if (!is_null($properties)) {
             $request->Properties = $properties;
         } else {
             $request->Properties = $this->getDefinitionOfObject($className);
@@ -248,7 +248,7 @@ class EtClient extends EtBaseClass
             if (count($results->Properties) > 0) {
                 $properties = $results->Properties;
                 foreach ($properties as $letter) {
-                    if ($letter->IsRetrievable == true) {
+                    if ($letter->IsRetrievable === true) {
                         $lstProps[] = $letter->Name;
                     }
                 }

@@ -598,7 +598,7 @@ class XMLSecurityDSig
 
                 /* Add namespace nodes */
                 foreach ($arNS as $namespaceURI => $prefix) {
-                    if ($prefix != null) {
+                    if (!is_null($prefix)) {
                         $elCopy->setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:".$prefix, $namespaceURI);
                     }
                 }
@@ -640,7 +640,7 @@ class XMLSecurityDSig
                     return;
                 }
                 /* Currently only exclusive XML is supported */
-                if ($exclusive == false) {
+                if ($exclusive === false) {
                     throw new Exception("Only exclusive canonicalization is supported in this version of PHP");
                 }
 

@@ -27,7 +27,7 @@ class WSSESoap
 
     private function locateSecurityHeader($bMustUnderstand = true, $setActor = null)
     {
-        if ($this->secNode == null) {
+        if (is_null($this->secNode)) {
             $headers = $this->SOAPXPath->query('//wssoap:Envelope/wssoap:Header');
             $header = $headers->item(0);
             if (! $header) {
