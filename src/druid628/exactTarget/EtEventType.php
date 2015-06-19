@@ -5,15 +5,16 @@ namespace druid628\exactTarget;
 
 class EtEventType extends EtBaseClass
 {
-    const Open                = 'Open';
-    const Click               = 'Click';
-    const HardBounce          = 'HardBounce';
-    const SoftBounce          = 'SoftBounce';
-    const OtherBounce         = 'OtherBounce';
-    const Unsubscribe         = 'Unsubscribe';
-    const Sent                = 'Sent';
-    const NotSent             = 'NotSent';
-    const Survey              = 'Survey';
-    const ForwardedEmail      = 'ForwardedEmail';
-    const ForwardedEmailOptIn = 'ForwardedEmailOptIn';
+
+    const OPEN                    = 'Open';
+    const CLICK                   = 'Click';
+    const HARD_BOUNCE             = 'HardBounce';
+    const SOFT_BOUNCE             = 'SoftBounce';
+    const OTHER_BOUNCE            = 'OtherBounce';
+    const UNSUBSCRIBE             = 'Unsubscribe';
+    const SENT                    = 'Sent';
+    const NOT_SENT                = 'NotSent';
+    const SURVEY                  = 'Survey';
+    const FORWARDED_EMAIL         = 'ForwardedEmail';
+    const FORWARDED_EMAIL_OPT_IN  = 'ForwardedEmailOptIn';
 }

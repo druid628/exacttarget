@@ -5,8 +5,8 @@ namespace druid628\exactTarget;
 
 class EtDateTimeUnitOfMeasure extends EtBaseClass
 {
-    const Days   = 'Days';
-    const Weeks  = 'Weeks';
-    const Months = 'Months';
-    const Years  = 'Years';
+    const DAYS   = 'Days';
+    const WEEKS  = 'Weeks';
+    const MONTHS = 'Months';
+    const YEARS  = 'Years';
 }

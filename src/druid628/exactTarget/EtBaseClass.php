@@ -141,7 +141,7 @@ abstract class EtBaseClass
      * @see druid628\exactTarget\EtSubscriber
      *
      */
-    protected function reAssign($newClass)
+    protected function reAssign(EtBaseclass $newClass)
     {
         if (get_class($newClass) !== get_class($this)) {
             return false;

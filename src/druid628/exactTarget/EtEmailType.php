@@ -5,6 +5,6 @@ namespace druid628\exactTarget;
 
 class EtEmailType extends EtBaseClass
 {
-    const Text = 'Text';
+    const TEXT = 'Text';
     const HTML = 'HTML';
 }

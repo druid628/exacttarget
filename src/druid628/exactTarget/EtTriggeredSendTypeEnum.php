@@ -5,7 +5,7 @@ namespace druid628\exactTarget;
 
 class EtTriggeredSendTypeEnum extends EtBaseClass
 {
-    const Continuous = 'Continuous';
-    const Batched    = 'Batched';
-    const Scheduled  = 'Scheduled';
+    const CONTINUOUS = 'Continuous';
+    const BATCHED    = 'Batched';
+    const SCHEDULED  = 'Scheduled';
 }

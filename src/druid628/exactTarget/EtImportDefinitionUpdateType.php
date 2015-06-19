@@ -5,9 +5,9 @@ namespace druid628\exactTarget;
 
 class EtImportDefinitionUpdateType extends EtBaseClass
 {
-    const AddAndUpdate      = 'AddAndUpdate';
-    const AddAndDoNotUpdate = 'AddAndDoNotUpdate';
-    const UpdateButDoNotAdd = 'UpdateButDoNotAdd';
-    const Merge             = 'Merge';
-    const Overwrite         = 'Overwrite';
+    const ADD_UPDATE      = 'AddAndUpdate';
+    const ADD_NO_UPDATE   = 'AddAndDoNotUpdate';
+    const UPDATE_NO_ADD   = 'UpdateButDoNotAdd';
+    const MERGE           = 'Merge';
+    const OVERWRITE       = 'Overwrite';
 }

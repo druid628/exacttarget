@@ -63,7 +63,12 @@ class WSSESoap
         return $this->secNode;
     }
 
-    public function __construct($doc, $bMustUnderstand = true, $setActor = null)
+    /**
+     * @param \DOMDocument $doc
+     * @param bool|true    $bMustUnderstand
+     * @param null         $setActor
+     */
+    public function __construct(\DOMDocument $doc, $bMustUnderstand = true, $setActor = null)
     {
         $this->soapDoc = $doc;
         $this->envelope = $doc->documentElement;
@@ -138,7 +143,7 @@ class WSSESoap
         $security->insertBefore($token, $security->firstChild);
 
         $token->setAttribute('EncodingType', 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary');
-        $token->setAttributeNS(WSSESoap::WSUNS, WSSESoap::WSUPFX.':Id', XMLSecurityDSig::generate_GUID());
+        $token->setAttributeNS(WSSESoap::WSUNS, WSSESoap::WSUPFX.':Id', XMLSecurityDSig::generateGUID());
         $token->setAttribute('ValueType', 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3');
 
         return $token;
@@ -208,7 +213,15 @@ class WSSESoap
         $objDSig->appendSignature($this->secNode, true);
     }
 
-    public function addEncryptedKey($key, $token)
+    /**
+     * Add Encrypted Key
+     *
+     * @param XMLSecEnc    $key
+     * @param \DOMElement  $token
+     *
+     * @return bool
+     */
+    public function addEncryptedKey(XMLSecEnc $key, \DOMElement $token)
     {
         if (! $key->encKey) {
             return false;
@@ -237,7 +250,7 @@ class WSSESoap
         }
 
         $security->insertBefore($encKey, $lastToken);
-        $key->guid = XMLSecurityDSig::generate_GUID();
+        $key->guid = XMLSecurityDSig::generateGUID();
         $encKey->setAttribute('Id', $key->guid);
         $encMethod = $encKey->firstChild;
         while ($encMethod && $encMethod->localName != 'EncryptionMethod') {
@@ -259,7 +272,7 @@ class WSSESoap
         return true;
     }
 
-    public function AddReference($baseNode, $guid)
+    public function addReference(\DOMNode $baseNode, $guid)
     {
         $refList = null;
         $child = $baseNode->firstChild;
@@ -280,7 +293,7 @@ class WSSESoap
         $dataref->setAttribute('URI', '#'.$guid);
     }
 
-    public function EncryptBody($siteKey, $objKey, $token)
+    public function encryptBody($siteKey, $objKey, $token)
     {
         $enc = new XMLSecEnc();
         foreach ($this->envelope->childNodes as $node) {
@@ -292,11 +305,11 @@ class WSSESoap
         /* encrypt the symmetric key */
         $enc->encryptKey($siteKey, $objKey, false);
 
-        $enc->type = XMLSecEnc::Content;
+        $enc->type = XMLSecEnc::CONTENT;
         /* Using the symmetric key to actually encrypt the data */
         $encNode = $enc->encryptNode($objKey);
 
-        $guid = XMLSecurityDSig::generate_GUID();
+        $guid = XMLSecurityDSig::generateGUID();
         $encNode->setAttribute('Id', $guid);
 
         $refNode = $encNode->firstChild;
@@ -307,7 +320,7 @@ class WSSESoap
             $refNode = $refNode->nextSibling;
         }
         if ($this->addEncryptedKey($enc, $token)) {
-            $this->AddReference($enc->encKey, $guid);
+            $this->addReference($enc->encKey, $guid);
         }
     }
 

@@ -5,6 +5,6 @@ namespace druid628\exactTarget;
 
 class EtMonthlyRecurrencePatternTypeEnum extends EtBaseClass
 {
-    const ByDay  = 'ByDay';
-    const ByWeek = 'ByWeek';
+    const BY_DAY  = 'ByDay';
+    const BY_WEEK = 'ByWeek';
 }
