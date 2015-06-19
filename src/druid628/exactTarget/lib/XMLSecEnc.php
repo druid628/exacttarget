@@ -70,9 +70,8 @@ class XMLSecEnc
                                 $this->encdoc->documentElement->setAttribute('Type', XMLSecEnc::Content);
                                 break;
                         default:
-                                throw new Exception('Type is currently not supported');
 
-                                return;
+                                throw new Exception('Type is currently not supported');
                 }
 
         $encMethod = $this->encdoc->documentElement->appendChild($this->encdoc->createElementNS(XMLSecEnc::XMLENCNS, 'xenc:EncryptionMethod'));

@@ -69,9 +69,9 @@ class XMLSecurityKey
                                         break;
                                     }
                                 }
+
                                 throw new Exception('Certificate "type" (private/public) must be passed via parameters');
 
-                                return;
                         case (XMLSecurityKey::RSA_OAEP_MGF1P):
                                 $this->cryptParams['library'] = 'openssl';
                                 $this->cryptParams['padding'] = OPENSSL_PKCS1_OAEP_PADDING;
@@ -83,9 +83,9 @@ class XMLSecurityKey
                                         break;
                                     }
                                 }
+
                                 throw new Exception('Certificate "type" (private/public) must be passed via parameters');
 
-                                return;
                         case (XMLSecurityKey::RSA_SHA1):
                                 $this->cryptParams['library'] = 'openssl';
                                 $this->cryptParams['method'] = 'http://www.w3.org/2000/09/xmldsig#rsa-sha1';
@@ -95,12 +95,13 @@ class XMLSecurityKey
                                         break;
                                     }
                                 }
+
                                 throw new Exception('Certificate "type" (private/public) must be passed via parameters');
                                 break;
                         default:
+
                                 throw new Exception('Invalid Key Type');
 
-                                return;
                 }
         $this->type = $type;
     }
@@ -204,15 +205,14 @@ class XMLSecurityKey
     {
         if ($this->cryptParams['type'] == 'public') {
             if (!openssl_public_encrypt($data, $encrypted_data, $this->key, $this->cryptParams['padding'])) {
+
                 throw new Exception('Failure encrypting Data');
 
-                return;
             }
         } else {
             if (!openssl_private_encrypt($data, $encrypted_data, $this->key, $this->cryptParams['padding'])) {
-                throw new Exception('Failure encrypting Data');
 
-                return;
+                throw new Exception('Failure encrypting Data');
             }
         }
 
@@ -223,15 +223,13 @@ class XMLSecurityKey
     {
         if ($this->cryptParams['type'] == 'public') {
             if (!openssl_public_decrypt($data, $decrypted, $this->key, $this->cryptParams['padding'])) {
-                throw new Exception('Failure decrypting Data');
 
-                return;
+                throw new Exception('Failure decrypting Data');
             }
         } else {
             if (!openssl_private_decrypt($data, $decrypted, $this->key, $this->cryptParams['padding'])) {
-                throw new Exception('Failure decrypting Data');
 
-                return;
+                throw new Exception('Failure decrypting Data');
             }
         }
 
@@ -241,9 +239,8 @@ class XMLSecurityKey
     private function signOpenSSL($data)
     {
         if (!openssl_sign($data, $signature, $this->key)) {
-            throw new Exception('Failure Signing Data');
 
-            return;
+            throw new Exception('Failure Signing Data');
         }
 
         return $signature;
