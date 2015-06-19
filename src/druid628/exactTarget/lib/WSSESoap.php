@@ -129,7 +129,7 @@ class WSSESoap
         $token->appendChild($created);
     }
 
-    public function addBinaryToken($cert, $isPEMFormat = true, $isDSig = true)
+    public function addBinaryToken($cert, $isPEMFormat = true)
     {
         $security = $this->locateSecurityHeader();
         $data = XMLSecurityDSig::get509XCert($cert, $isPEMFormat);
@@ -208,7 +208,7 @@ class WSSESoap
         $objDSig->appendSignature($this->secNode, true);
     }
 
-    public function addEncryptedKey($node, $key, $token)
+    public function addEncryptedKey($key, $token)
     {
         if (! $key->encKey) {
             return false;
@@ -306,7 +306,7 @@ class WSSESoap
         if ($refNode) {
             $refNode = $refNode->nextSibling;
         }
-        if ($this->addEncryptedKey($encNode, $enc, $token)) {
+        if ($this->addEncryptedKey($enc, $token)) {
             $this->AddReference($enc->encKey, $guid);
         }
     }
