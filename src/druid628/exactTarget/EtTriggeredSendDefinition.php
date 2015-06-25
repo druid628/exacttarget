@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtTriggeredSendDefinition extends EtBaseClass
 {
@@ -34,4 +33,3 @@ class EtTriggeredSendDefinition extends EtBaseClass
     public $SendSourceDataExtension; // EtDataExtension
     public $IsAlwaysOn; // boolean
 }
-

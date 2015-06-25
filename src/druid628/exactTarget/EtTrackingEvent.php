@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtTrackingEvent extends EtBaseClass
 {
@@ -13,4 +12,3 @@ class EtTrackingEvent extends EtBaseClass
     public $TriggeredSendDefinitionObjectID; // String
     public $BatchID; // int
 }
-

@@ -2,8 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
-use druid628\exactTarget\EtSubscriberList;
 
 /**
  * EtSubscriber (Active Class)
@@ -17,7 +15,6 @@ use druid628\exactTarget\EtSubscriberList;
  */
 class EtSubscriber extends EtBaseClass
 {
-
     const ACTIVE       = 'Active';
     const BOUNCED      = 'Bounced';
     const HELD         = 'Held';
@@ -84,39 +81,38 @@ class EtSubscriber extends EtBaseClass
      *
      * @param string $subscriberKey
      * @param string $emailAddress
-     * @param array  $options - Multidimensional array of other optional data about a subscriber should be in the following co
-     *                        array(
-     *             'Name'     => 'SubscriberKey',
-     *             'operator' => 'equals',
-     *             'Value'    => $subscriberKey,
-     *         ),
+     * @param array  $options       - Multidimensional array of other optional data about a subscriber should be in the following co
+     *                              array(
+     *                              'Name'     => 'SubscriberKey',
+     *                              'operator' => 'equals',
+     *                              'Value'    => $subscriberKey,
+     *                              ),
      */
-    public function find($subscriberKey, $emailAddress = null, $options = array())
+    public function find($subscriberKey, $emailAddress = null)
     {
-        $subscriberInfo = array(
-            array(
-                'Name'     => 'SubscriberKey',
-                'operator' => 'equals',
-                'Value'    => $subscriberKey,
-            ),
-        );
+        $subscriberFilter = new EtSimpleFilterPart();
+        $subscriberFilter->Property = "SubscriberKey";
+        $subscriberFilter->SimpleOperator = EtSimpleOperators::EQUALS;
+        $subscriberFilter->Value = array($subscriberKey);
+        $filter = $subscriberFilter;
 
-        if (!is_null($emailAddress)) {
-            $subscriberInfo[] = array(
-                'Name'     => 'EmailAddress',
-                'operator' => 'equals',
-                'Value'    => $emailAddress,
-            );
-        }
-        if (!empty($options)) {
-            $subscriberInfo = array_merge($subscriberInfo, $options);
+        if (! is_null($emailAddress)) {
+            $emailFilter = new EtSimpleFilterPart();
+            $emailFilter->Property = "EmailAddress";
+            $emailFilter->SimpleOperator = EtSimpleOperators::EQUALS;
+            $emailFilter->Value = array($emailAddress);
+
+            $filter = new EtComplexFilterPart();
+            $filter->LeftOperand = $subscriberFilter;
+            $filter->LogicalOperator = EtLogicalOperators::_AND;
+            $filter->RightOperand = $emailFilter;
         }
 
-        if ($newSub = $this->client->recallSubscriber($subscriberInfo)) {
+        if ($newSub = $this->client->recallSubscriber($filter)) {
             $this->reAssign($newSub);
             $this->setNotNew();
         } else {
-            $this->populateNew($subscriberInfo);
+            $this->populateNew($subscriberKey, $emailAddress);
         }
     }
 
@@ -126,12 +122,11 @@ class EtSubscriber extends EtBaseClass
      *
      * @param array $subscriberInfo
      */
-    protected function populateNew($subscriberInfo)
+    protected function populateNew($subscriberKey, $emailAddress = null)
     {
-        foreach ($subscriberInfo as $info) {
-            if (strtolower($info['operator']) == "equals") {
-                $this->set($info['Name'], $info['Value']);
-            }
+        $this->set('SubscriberKey', $subscriberKey);
+        if (! is_null($emailAddress)) {
+            $this->set('EmailAddress', $emailAddress);
         }
     }
 
@@ -164,9 +159,9 @@ class EtSubscriber extends EtBaseClass
     public function updateAttribute($EtAttribute)
     {
         if (!($EtAttribute instanceof \druid628\exactTarget\EtAttribute)) {
-            throw new \Exception(" updateAttribute expects an instance of \druid628\exactTarget\EtAttribute and was given " . get_class(
+            throw new \Exception(" updateAttribute expects an instance of \druid628\exactTarget\EtAttribute and was given ".get_class(
                 $EtAttribute
-            ) . ". ");
+            ).". ");
         }
         $nameToUpdate = $EtAttribute->getName();
         $attributes   = $this->getAttributes();
@@ -215,5 +210,4 @@ class EtSubscriber extends EtBaseClass
     {
         return $this->_new;
     }
-
 }

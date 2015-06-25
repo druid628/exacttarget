@@ -2,9 +2,8 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
-class EtPropertyDefinition extends EtBaseClass
+class EtPropertyDefinition extends EtAPIObject
 {
     public $Name; // String
     public $DataType; // String
@@ -42,4 +41,3 @@ class EtPropertyDefinition extends EtBaseClass
     public $Status; // String
     public $IsContextSpecific; // boolean
 }
-

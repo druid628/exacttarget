@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtDeleteResponse extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtDeleteResponse extends EtBaseClass
     public $RequestID; // String
     public $OverallStatus; // String
 }
-

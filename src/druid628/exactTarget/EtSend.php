@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSend extends EtBaseClass
 {
@@ -38,4 +37,3 @@ class EtSend extends EtBaseClass
     public $SendWindowClose; // time
     public $IsAlwaysOn; // boolean
 }
-

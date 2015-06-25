@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSendDefinitionList extends EtBaseClass
 {
@@ -12,4 +11,3 @@ class EtSendDefinitionList extends EtBaseClass
     public $Name; // String
     public $Parameters; // EtParameters
 }
-

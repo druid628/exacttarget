@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtRecallResponseMsg extends EtBaseClass
 {
@@ -10,4 +9,3 @@ class EtRecallResponseMsg extends EtBaseClass
     public $RequestID; // String
     public $Results; // EtAPIObject
 }
-

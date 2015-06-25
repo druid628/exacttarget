@@ -2,10 +2,7 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
-class EtFilterPart extends EtBaseClass
+abstract class EtFilterPart extends EtBaseClass
 {
 }
-
-

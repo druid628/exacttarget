@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSubscriberList extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtSubscriberList extends EtBaseClass
     public $List; // EtList
     public $Action; // String
 }
-

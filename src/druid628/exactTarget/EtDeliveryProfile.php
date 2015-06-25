@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtDeliveryProfile extends EtBaseClass
 {
@@ -17,4 +16,3 @@ class EtDeliveryProfile extends EtBaseClass
     public $FooterSalutationSource; // EtSalutationSourceEnum
     public $FooterContentArea; // EtContentArea
 }
-

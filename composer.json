@@ -18,6 +18,9 @@
         "lib-openssl" : "*",
         "ext-mcrypt"  : "*"
     },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"

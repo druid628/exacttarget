@@ -2,11 +2,9 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtRecurrenceRangeTypeEnum extends EtBaseClass
 {
-    const EndAfter = 'EndAfter';
-    const EndOn    = 'EndOn';
+    const END_AFTER = 'EndAfter';
+    const END_ON    = 'EndOn';
 }
-

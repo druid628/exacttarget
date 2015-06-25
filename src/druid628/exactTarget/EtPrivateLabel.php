@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtPrivateLabel extends EtBaseClass
 {
@@ -13,4 +12,3 @@ class EtPrivateLabel extends EtBaseClass
     public $Delete; // int
     public $SetActive; // boolean
 }
-

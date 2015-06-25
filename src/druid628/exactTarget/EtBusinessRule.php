@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtBusinessRule extends EtBaseClass
 {
@@ -18,4 +17,3 @@ class EtBusinessRule extends EtBaseClass
     public $DisplayName; // String
     public $ProductCode; // String
 }
-

@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtPrivateIP extends EtBaseClass
 {
@@ -12,4 +11,3 @@ class EtPrivateIP extends EtBaseClass
     public $OrdinalID; // short
     public $IPAddress; // String
 }
-

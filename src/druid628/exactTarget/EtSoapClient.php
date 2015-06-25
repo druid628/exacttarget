@@ -19,7 +19,7 @@ class EtSoapClient extends \SoapClient
     public $username = null;
     public $password = null;
 
-    function __doRequest($request, $location, $saction, $version, $one_way = 0)
+    public function __doRequest($request, $location, $saction, $version, $one_way = 0)
     {
         $doc = new \DOMDocument();
         $doc->loadXML($request);
@@ -30,5 +30,4 @@ class EtSoapClient extends \SoapClient
 
         return parent::__doRequest($objWSSE->saveXML(), $location, $saction, $version, $one_way);
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtYearlyRecurrence extends EtBaseClass
 {
@@ -12,4 +11,3 @@ class EtYearlyRecurrence extends EtBaseClass
     public $ScheduledMonth; // EtMonthOfYearEnum
     public $ScheduledDayOfWeek; // EtDayOfWeekEnum
 }
-

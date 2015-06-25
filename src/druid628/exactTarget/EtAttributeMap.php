@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtAttributeMap extends EtBaseClass
 {
@@ -12,5 +11,3 @@ class EtAttributeMap extends EtBaseClass
     public $EntityNameMappedTo; // String
     public $AdditionalData; // EtAPIProperty
 }
-
-

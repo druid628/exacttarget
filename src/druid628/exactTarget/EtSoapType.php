@@ -2,13 +2,11 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSoapType extends EtBaseClass
 {
-    const xsd_string   = 'xsd:string';
-    const xsd_boolean  = 'xsd:boolean';
-    const xsd_double   = 'xsd:double';
-    const xsd_dateTime = 'xsd:dateTime';
+    const XSD_STRING   = 'xsd:string';
+    const XSD_BOOLEAN  = 'xsd:boolean';
+    const XSD_DOUBLE   = 'xsd:double';
+    const XSD_DATETIME = 'xsd:dateTime';
 }
-

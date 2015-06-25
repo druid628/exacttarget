@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtExtractParameterDescription extends EtBaseClass
 {
@@ -11,4 +10,3 @@ class EtExtractParameterDescription extends EtBaseClass
     public $DefaultValue; // String
     public $IsOptional; // boolean
 }
-

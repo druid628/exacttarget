@@ -2,12 +2,10 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSendDefinitionListTypeEnum extends EtBaseClass
 {
-    const SourceList      = 'SourceList';
-    const ExclusionList   = 'ExclusionList';
-    const DomainExclusion = 'DomainExclusion';
+    const SOURCE_LIST      = 'SourceList';
+    const EXCLUSION_LIST   = 'ExclusionList';
+    const DOMAIN_EXCLUSION = 'DomainExclusion';
 }
-

@@ -2,7 +2,6 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\EtBaseClass;
 
 class EtSubscription extends EtBaseClass
 {
@@ -24,4 +23,3 @@ class EtSubscription extends EtBaseClass
     public $ForAccounting; // String
     public $HasPurchasedEmails; // boolean
 }
-
