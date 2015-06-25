@@ -2,7 +2,7 @@
 
 namespace druid628\exactTarget;
 
-use druid628\exactTarget\lib\WSSESoap;
+use druid628\exactTarget\WSSE\WSSESoap;
 
 /**
  * EtSoapClient
