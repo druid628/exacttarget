@@ -353,7 +353,7 @@ class EtClient extends EtBaseClass
                 $self = $this;
 
                 return array_map(
-                    function ($object) use ($nsClass, $self) {
+                    function (\stdClass $object) use ($nsClass, $self) {
                         $newObject = $self->cast($object->Object, new $nsClass());
                         if (isset($object->StatusCode)) {
                             $newObject->StatusCode = $object->StatusCode;
