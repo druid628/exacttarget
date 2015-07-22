@@ -5,6 +5,6 @@ namespace druid628\exactTarget;
 
 class EtLogicalOperators extends EtBaseClass
 {
-    const _OR  = 'OR';
-    const _AND = 'AND';
+    const LOGICAL_OR  = 'OR';
+    const LOGICAL_AND = 'AND';
 }
