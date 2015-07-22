@@ -104,7 +104,7 @@ class EtSubscriber extends EtBaseClass
 
             $filter = new EtComplexFilterPart();
             $filter->LeftOperand = $subscriberFilter;
-            $filter->LogicalOperator = EtLogicalOperators::_AND;
+            $filter->LogicalOperator = EtLogicalOperators::LOGICAL_AND;
             $filter->RightOperand = $emailFilter;
         }
 

@@ -12,12 +12,7 @@ use druid628\exactTarget\Exception\EtMethodNotFoundException;
  *
  * @property const        PRODWSDL
  * @property const        SOAPWSDL
- * @property const        ADDONLY
- * @property const        _DEFAULT
- * @property const        NOTHING
- * @property const        UPDATEADD
- * @property const        UPDATEONLY
- *
+*
  * @property EtSoapClient $client
  * @property string       $serverInstance
  * @property string       $wsdl
@@ -31,13 +26,6 @@ class EtClient extends EtBaseClass
 {
     // Exact Target API WSDL
     const SOAPWSDL = "http://exacttarget.com/wsdl/partnerAPI";
-
-    // Save Actions
-    const ADDONLY    = 'AddOnly';
-    const _DEFAULT   = 'Default';
-    const NOTHING    = 'Nothing';
-    const UPDATEADD  = 'UpdateAdd';
-    const UPDATEONLY = 'UpdateOnly';
 
     /** @var \druid628\exactTarget\EtSoapClient $client */
     protected $client;
@@ -285,7 +273,7 @@ class EtClient extends EtBaseClass
         $requestOptions                = new EtCreateOptions();
         $saveOption                    = new EtSaveOption();
         $saveOption->PropertyName      = $className;
-        $saveOption->SaveAction        = constant("self::".strtoupper($updateType));
+        $saveOption->SaveAction        = constant("EtSaveAction::SAVE_".strtoupper($updateType));
         $requestOptions->SaveOptions[] = new \SoapVar($saveOption, SOAP_ENC_OBJECT, "SaveOption", self::SOAPWSDL);
         $request->Options              = new \SoapVar($requestOptions, SOAP_ENC_OBJECT, "CreateOptions", self::SOAPWSDL);
         $request->Objects              = array($object);
@@ -335,7 +323,7 @@ class EtClient extends EtBaseClass
 
         $saveOption                    = new \druid628\exactTarget\EtSaveOption();
         $saveOption->PropertyName      = $className;
-        $saveOption->SaveAction        = constant("self::".strtoupper($updateType));
+        $saveOption->SaveAction        = constant("EtSaveAction::SAVE_".strtoupper($updateType));
         $requestOptions                = new \druid628\exactTarget\EtCreateOptions();
         $requestOptions->SaveOptions[] = new \SoapVar($saveOption, SOAP_ENC_OBJECT, "SaveOption", self::SOAPWSDL);
         $request                       = new \druid628\exactTarget\EtCreateRequest();
