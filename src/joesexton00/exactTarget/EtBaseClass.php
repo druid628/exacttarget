@@ -121,6 +121,9 @@ abstract class EtBaseClass {
                     }
             }
 
+            // make sure that we only have one result as object
+            if(is_array($obj)) $obj = $obj[0];
+
             // now lets see what we have set in $obj and transfer that to the new object
             $vars = get_object_vars($obj);
             foreach ($vars as $varName => $varValue) {
