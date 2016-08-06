@@ -28,7 +28,7 @@ class EtClient extends EtBaseClass
     const SOAPWSDL = "http://exacttarget.com/wsdl/partnerAPI";
 
     /** @var \druid628\exactTarget\EtSoapClient $client */
-    public $client;
+    protected $client;
 
     /** @var  string $serverInstance */
     protected $serverInstance;
