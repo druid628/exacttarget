@@ -3,7 +3,7 @@ ExactTargetComponent
 
 **Package:** druid628\exactTarget  
 **Uses:** EtBaseClass.php  
-**Version:** 1.0  
+**Version:** 1.2.x  
 ![author](http://img.shields.io/badge/author-druid628-blue.svg)  
 ![Project status](http://stillmaintained.com/druid628/exacttarget.png)
 [![Build Status](https://travis-ci.org/druid628/exacttarget.png?branch=master)](https://travis-ci.org/druid628/exacttarget) 
@@ -80,5 +80,6 @@ Contributors
  * Micah Breedlove - <https://github.com/druid628> - [@druid628](http://twitter.com/druid628)
  * Matt Rathbun  
  * Ryder Ross - <https://github.com/ryross>
+ * Rhys Laval - <https://github.com/rlweb>
  * brainbowler - <https://github.com/brainbowler>
 
