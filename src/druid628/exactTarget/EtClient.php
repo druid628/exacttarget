@@ -269,16 +269,20 @@ class EtClient extends EtBaseClass
 
         $object = new \SoapVar($activeClass, SOAP_ENC_OBJECT, $className, self::SOAPWSDL);
 
-        $request                       = new EtCreateRequest();
-        $requestOptions                = new EtCreateOptions();
+        $request                       = new EtUpdateRequest();
+        $requestOptions                = new EtUpdateOptions();
         $saveOption                    = new EtSaveOption();
         $saveOption->PropertyName      = $className;
         $saveOption->SaveAction        = constant("EtSaveAction::SAVE_".strtoupper($updateType));
         $requestOptions->SaveOptions[] = new \SoapVar($saveOption, SOAP_ENC_OBJECT, "SaveOption", self::SOAPWSDL);
-        $request->Options              = new \SoapVar($requestOptions, SOAP_ENC_OBJECT, "CreateOptions", self::SOAPWSDL);
+        $request->Options              = new \SoapVar($requestOptions, SOAP_ENC_OBJECT, "UpdateOptions", self::SOAPWSDL);
         $request->Objects              = array($object);
 
-        $results = $this->client->Create($request);
+        $results = $this->client->Update($request);
+
+        if ($results->OverallStatus != 'OK') {
+            throw new EtSoapException($results->Results->ErrorMessage, $results->Results->ErrorCode);
+        }
 
         $updatedClass = $this->cast($results->Results->Object, new $nsClass($this), $this);
 
