@@ -106,6 +106,8 @@ class EtSubscriber extends EtBaseClass
             $filter->LeftOperand = $subscriberFilter;
             $filter->LogicalOperator = EtLogicalOperators::LOGICAL_AND;
             $filter->RightOperand = $emailFilter;
+        } else {
+            $emailAddress = $subscriberKey;
         }
 
         if ($newSub = $this->client->recallSubscriber($filter)) {
