@@ -273,7 +273,7 @@ class EtClient extends EtBaseClass
         $requestOptions                = new EtUpdateOptions();
         $saveOption                    = new EtSaveOption();
         $saveOption->PropertyName      = $className;
-        $saveOption->SaveAction        = constant("EtSaveAction::SAVE_".strtoupper($updateType));
+        $saveOption->SaveAction        = constant("\\druid628\\exactTarget\\EtSaveAction::SAVE_".strtoupper($updateType));
         $requestOptions->SaveOptions[] = new \SoapVar($saveOption, SOAP_ENC_OBJECT, "SaveOption", self::SOAPWSDL);
         $request->Options              = new \SoapVar($requestOptions, SOAP_ENC_OBJECT, "UpdateOptions", self::SOAPWSDL);
         $request->Objects              = array($object);
@@ -327,7 +327,7 @@ class EtClient extends EtBaseClass
 
         $saveOption                    = new \druid628\exactTarget\EtSaveOption();
         $saveOption->PropertyName      = $className;
-        $saveOption->SaveAction        = constant("EtSaveAction::SAVE_".strtoupper($updateType));
+        $saveOption->SaveAction        = constant("\\druid628\\exactTarget\\EtSaveAction::SAVE_".strtoupper($updateType));
         $requestOptions                = new \druid628\exactTarget\EtCreateOptions();
         $requestOptions->SaveOptions[] = new \SoapVar($saveOption, SOAP_ENC_OBJECT, "SaveOption", self::SOAPWSDL);
         $request                       = new \druid628\exactTarget\EtCreateRequest();
