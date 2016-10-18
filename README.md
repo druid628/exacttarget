@@ -35,7 +35,7 @@ Add exacttarget to your composer.json
 
     {
         "require": {
-                "druid628/exacttarget": "dev-master"
+                "druid628/exacttarget": "~1.2"
         }
     }
 
