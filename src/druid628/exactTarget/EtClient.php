@@ -281,7 +281,7 @@ class EtClient extends EtBaseClass
         $results = $this->client->Update($request);
 
         if ($results->OverallStatus != 'OK') {
-            throw new EtSoapException($results->Results->ErrorMessage, $results->Results->ErrorCode);
+            throw new EtSoapException($results->Results->StatusMessage, $results->Results->ErrorCode);
         }
 
         $updatedClass = $this->cast($results->Results->Object, new $nsClass($this), $this);
